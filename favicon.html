@@ -1,0 +1,5160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="A free favicon generator for websites, applications and progressive web apps. Create complete browser, Apple, Android, PWA, Safari and Windows favicon packages directly in your browser."
+  />
+
+  <meta name="robots" content="index,follow" />
+  <meta name="theme-color" content="#f7f5f0" />
+
+  <title>Favicon Studio — Free Favicon Generator</title>
+
+  <style>
+    :root{
+      --page:#f6f4ef;
+      --paper:#ffffff;
+      --paper-soft:#fbfaf7;
+      --ink:#1d2421;
+      --ink-soft:#4d5752;
+      --muted:#78817c;
+      --faint:#a2aaa5;
+
+      --line:#dddeda;
+      --line-soft:#e9e9e4;
+
+      --green:#315f50;
+      --green-dark:#23493d;
+      --green-soft:#edf4f0;
+
+      --blue:#42677d;
+      --blue-soft:#eef4f7;
+
+      --amber:#8b6841;
+      --amber-soft:#f7f1e8;
+
+      --danger:#9a4d4d;
+      --danger-soft:#f9eeee;
+
+      --shadow:0 10px 35px rgba(32,39,35,.07);
+      --shadow-soft:0 3px 15px rgba(32,39,35,.05);
+
+      --radius:14px;
+      --radius-small:9px;
+
+      --content:1320px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--ink);
+      background:var(--page);
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+      line-height:1.5;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(49,95,80,.018) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          rgba(49,95,80,.018) 1px,
+          transparent 1px
+        );
+      background-size:48px 48px;
+      mask-image:linear-gradient(to bottom,#000,transparent 75%);
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    button,
+    input,
+    select{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    .container{
+      width:min(var(--content),calc(100% - 40px));
+      margin:auto;
+    }
+
+    /* =====================================================
+       HEADER
+       ===================================================== */
+
+    .site-header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(246,244,239,.94);
+      border-bottom:1px solid var(--line);
+      backdrop-filter:blur(12px);
+    }
+
+    .header-inner{
+      min-height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .brand-mark{
+      width:36px;
+      height:36px;
+      display:grid;
+      place-items:center;
+      border:1px solid #cfd6d1;
+      border-radius:9px;
+      background:#fff;
+      color:var(--green);
+      font-weight:800;
+      font-size:14px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.15;
+    }
+
+    .brand-name{
+      font-size:14px;
+      font-weight:750;
+      letter-spacing:-.01em;
+    }
+
+    .brand-subtitle{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:10px;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+    }
+
+    .header-meta{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+
+    .free-label{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    /* =====================================================
+       HERO
+       ===================================================== */
+
+    .hero{
+      padding:74px 0 48px;
+      max-width:920px;
+    }
+
+    .section-label{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:18px;
+      color:var(--green);
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .section-label::before{
+      content:"";
+      width:22px;
+      height:1px;
+      background:var(--green);
+    }
+
+    .hero h1{
+      max-width:850px;
+      margin:0;
+      color:var(--ink);
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+      font-size:clamp(44px,6vw,78px);
+      font-weight:500;
+      line-height:1.02;
+      letter-spacing:-.045em;
+    }
+
+    .hero h1 em{
+      color:var(--green);
+      font-style:italic;
+    }
+
+    .hero p{
+      max-width:760px;
+      margin:24px 0 0;
+      color:var(--ink-soft);
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    .hero-note{
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      margin-top:25px;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    .hero-note span{
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+
+    .hero-note span::before{
+      content:"";
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--green);
+    }
+
+    /* =====================================================
+       WORKFLOW
+       ===================================================== */
+
+    .workflow{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:0;
+      margin-bottom:30px;
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+    }
+
+    .workflow-step{
+      position:relative;
+      padding:15px 18px;
+      border-right:1px solid var(--line);
+    }
+
+    .workflow-step:last-child{
+      border-right:0;
+    }
+
+    .workflow-number{
+      display:block;
+      color:var(--faint);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.1em;
+      margin-bottom:3px;
+    }
+
+    .workflow-title{
+      display:block;
+      font-size:12px;
+      font-weight:750;
+    }
+
+    .workflow-description{
+      display:block;
+      margin-top:2px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    /* =====================================================
+       MAIN WORKSPACE
+       ===================================================== */
+
+    .workspace{
+      display:grid;
+      grid-template-columns:370px minmax(0,1fr);
+      gap:22px;
+      align-items:start;
+      padding-bottom:70px;
+    }
+
+    .panel{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+    }
+
+    .panel-header{
+      padding:21px 22px;
+      border-bottom:1px solid var(--line-soft);
+      background:var(--paper-soft);
+    }
+
+    .panel-header h2{
+      margin:0;
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:-.015em;
+    }
+
+    .panel-header p{
+      margin:6px 0 0;
+      color:var(--muted);
+      font-size:11px;
+      line-height:1.6;
+    }
+
+    .panel-body{
+      padding:20px;
+    }
+
+    /* =====================================================
+       FORM
+       ===================================================== */
+
+    .field{
+      margin-bottom:19px;
+    }
+
+    .field:last-child{
+      margin-bottom:0;
+    }
+
+    .field-label{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:7px;
+      color:var(--ink);
+      font-size:11px;
+      font-weight:750;
+    }
+
+    .field-help{
+      color:var(--muted);
+      font-size:10px;
+      font-weight:400;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="color"]{
+      width:100%;
+      min-height:43px;
+      border:1px solid #d5d9d5;
+      border-radius:9px;
+      outline:none;
+      padding:0 12px;
+      color:var(--ink);
+      background:#fff;
+      transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="url"]:focus{
+      border-color:#789789;
+      box-shadow:0 0 0 3px rgba(49,95,80,.08);
+    }
+
+    input::placeholder{
+      color:#a4aaa6;
+    }
+
+    input[type="color"]{
+      padding:4px;
+      cursor:pointer;
+    }
+
+    input[type="range"]{
+      width:100%;
+      accent-color:var(--green);
+    }
+
+    .color-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    /* =====================================================
+       UPLOAD
+       ===================================================== */
+
+    .upload-box{
+      padding:22px 18px;
+      border:1px dashed #c8d0ca;
+      border-radius:11px;
+      background:#fafbf9;
+      text-align:center;
+      transition:
+        border-color .2s ease,
+        background .2s ease;
+    }
+
+    .upload-box.drag{
+      border-color:var(--green);
+      background:var(--green-soft);
+    }
+
+    .upload-symbol{
+      width:42px;
+      height:42px;
+      display:grid;
+      place-items:center;
+      margin:0 auto 11px;
+      border:1px solid #d6ddd8;
+      border-radius:10px;
+      background:#fff;
+      color:var(--green);
+      font-size:18px;
+    }
+
+    .upload-box strong{
+      display:block;
+      font-size:12px;
+      font-weight:750;
+    }
+
+    .upload-box p{
+      margin:5px auto 0;
+      max-width:260px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.55;
+    }
+
+    .upload-file{
+      margin-top:9px;
+      color:var(--green);
+      font-size:10px;
+      font-weight:700;
+      word-break:break-word;
+    }
+
+    #fileInput{
+      display:none;
+    }
+
+    /* =====================================================
+       PLACEMENT
+       ===================================================== */
+
+    .placement{
+      padding:15px;
+      border:1px solid #d8dfda;
+      border-radius:10px;
+      background:#f7faf8;
+    }
+
+    .placement-title{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--green-dark);
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .placement-title::before{
+      content:"2";
+      width:20px;
+      height:20px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--green);
+      color:#fff;
+      font-size:9px;
+    }
+
+    .placement-description{
+      margin:7px 0 10px;
+      color:var(--ink-soft);
+      font-size:10px;
+      line-height:1.55;
+    }
+
+    .path-input{
+      position:relative;
+    }
+
+    .path-input input{
+      padding-left:12px;
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+      font-size:11px;
+    }
+
+    .path-note{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.5;
+    }
+
+    .path-preview{
+      margin-top:9px;
+      padding:8px 9px;
+      border-radius:7px;
+      background:#fff;
+      border:1px solid var(--line-soft);
+      color:var(--blue);
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        monospace;
+      font-size:9px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    /* =====================================================
+       MODES
+       ===================================================== */
+
+    .mode-list{
+      display:grid;
+      gap:7px;
+    }
+
+    .mode{
+      width:100%;
+      display:grid;
+      grid-template-columns:20px 1fr;
+      gap:10px;
+      align-items:start;
+      padding:11px;
+      border:1px solid var(--line-soft);
+      border-radius:9px;
+      background:#fff;
+      color:var(--ink);
+      text-align:left;
+      transition:.18s ease;
+    }
+
+    .mode:hover{
+      border-color:#bdc9c1;
+      background:#fafcfb;
+    }
+
+    .mode.active{
+      border-color:#9ab4a8;
+      background:var(--green-soft);
+    }
+
+    .mode-radio{
+      width:17px;
+      height:17px;
+      margin-top:1px;
+      border:1px solid #bfc8c2;
+      border-radius:50%;
+      background:#fff;
+    }
+
+    .mode.active .mode-radio{
+      border:5px solid var(--green);
+    }
+
+    .mode strong{
+      display:block;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .mode span{
+      display:block;
+      margin-top:2px;
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.4;
+    }
+
+    /* =====================================================
+       CHECKBOXES
+       ===================================================== */
+
+    .options{
+      display:grid;
+      gap:7px;
+    }
+
+    .check{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      padding:9px 10px;
+      border:1px solid var(--line-soft);
+      border-radius:8px;
+      background:#fff;
+      cursor:pointer;
+    }
+
+    .check input{
+      accent-color:var(--green);
+    }
+
+    .check span{
+      color:var(--ink-soft);
+      font-size:10px;
+    }
+
+    /* =====================================================
+       BUTTONS
+       ===================================================== */
+
+    .button-row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-top:21px;
+    }
+
+    .button{
+      min-height:42px;
+      padding:0 14px;
+      border:1px solid #cfd5d1;
+      border-radius:8px;
+      background:#fff;
+      color:var(--ink);
+      font-size:11px;
+      font-weight:750;
+      transition:.18s ease;
+    }
+
+    .button:hover{
+      border-color:#aebbb3;
+      background:#fafbf9;
+    }
+
+    .button-primary{
+      border-color:var(--green);
+      background:var(--green);
+      color:#fff;
+    }
+
+    .button-primary:hover{
+      background:var(--green-dark);
+      border-color:var(--green-dark);
+    }
+
+    .button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    /* =====================================================
+       MAIN COLUMN
+       ===================================================== */
+
+    .main-column{
+      display:grid;
+      gap:18px;
+    }
+
+    /* =====================================================
+       PREVIEW
+       ===================================================== */
+
+    .preview{
+      overflow:hidden;
+    }
+
+    .preview-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      padding:17px 20px;
+      border-bottom:1px solid var(--line-soft);
+    }
+
+    .preview-header strong{
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .preview-header span{
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .browser{
+      margin:22px;
+      border:1px solid #d9ddd9;
+      border-radius:10px;
+      overflow:hidden;
+      background:#fff;
+    }
+
+    .browser-top{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:45px;
+      padding:8px 12px;
+      border-bottom:1px solid #e5e7e4;
+      background:#f7f8f6;
+    }
+
+    .browser-controls{
+      display:flex;
+      gap:4px;
+    }
+
+    .browser-controls i{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#c6cbc7;
+    }
+
+    .browser-tab{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      min-width:160px;
+      max-width:260px;
+      padding:6px 9px;
+      border:1px solid #e1e3e0;
+      border-bottom-color:#fff;
+      border-radius:7px 7px 0 0;
+      background:#fff;
+      color:#59635e;
+      font-size:9px;
+    }
+
+    .browser-tab img{
+      width:13px;
+      height:13px;
+      border-radius:3px;
+    }
+
+    .browser-content{
+      position:relative;
+      min-height:300px;
+      padding:35px;
+      background:
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #fbfbf9 100%
+        );
+    }
+
+    .mock-line{
+      width:42%;
+      height:8px;
+      margin-bottom:12px;
+      border-radius:4px;
+      background:#e9ece9;
+    }
+
+    .mock-line.short{
+      width:25%;
+    }
+
+    .mock-paragraph{
+      width:75%;
+      height:6px;
+      margin-bottom:7px;
+      border-radius:4px;
+      background:#eef0ed;
+    }
+
+    .preview-icon-large{
+      position:absolute;
+      right:48px;
+      top:65px;
+      width:92px;
+      height:92px;
+      border-radius:22px;
+      box-shadow:0 15px 40px rgba(49,95,80,.12);
+    }
+
+    .preview-foot{
+      display:flex;
+      align-items:end;
+      justify-content:center;
+      gap:15px;
+      margin-top:22px;
+    }
+
+    .preview-size{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:5px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .preview-size img{
+      width:var(--size);
+      height:var(--size);
+      border:1px solid #e0e3df;
+      border-radius:6px;
+      padding:3px;
+      background:#fff;
+    }
+
+    /* =====================================================
+       CODE PANEL
+       ===================================================== */
+
+    .code-tabs{
+      display:flex;
+      gap:2px;
+      padding:6px;
+      border-bottom:1px solid var(--line-soft);
+      overflow:auto;
+      background:#fafaf8;
+    }
+
+    .code-tab{
+      flex:0 0 auto;
+      border:0;
+      border-radius:6px;
+      padding:8px 11px;
+      background:transparent;
+      color:var(--muted);
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.03em;
+    }
+
+    .code-tab.active{
+      background:#fff;
+      color:var(--green);
+      box-shadow:0 1px 4px rgba(0,0,0,.05);
+    }
+
+    .code-container{
+      position:relative;
+    }
+
+    .code{
+      min-height:260px;
+      max-height:440px;
+      overflow:auto;
+      margin:0;
+      padding:21px;
+      background:#f8f8f5;
+      color:#35413b;
+      font:
+        11px/1.75
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        monospace;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+
+    .copy-button{
+      position:absolute;
+      top:10px;
+      right:10px;
+      z-index:2;
+    }
+
+    /* =====================================================
+       ASSETS
+       ===================================================== */
+
+    .asset-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:15px;
+      padding:19px 21px;
+      border-bottom:1px solid var(--line-soft);
+    }
+
+    .asset-header h2{
+      margin:0;
+      font-size:13px;
+      font-weight:800;
+    }
+
+    .asset-count{
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .asset-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+      gap:8px;
+      padding:15px;
+    }
+
+    .asset{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:0;
+      padding:10px;
+      border:1px solid var(--line-soft);
+      border-radius:8px;
+      background:#fff;
+    }
+
+    .asset-icon{
+      width:36px;
+      height:36px;
+      flex:0 0 auto;
+      display:grid;
+      place-items:center;
+      border:1px solid #e0e3df;
+      border-radius:7px;
+      background:#fafbf9;
+      color:var(--green);
+      font-size:11px;
+      overflow:hidden;
+    }
+
+    .asset-icon img{
+      width:100%;
+      height:100%;
+      padding:5px;
+      object-fit:contain;
+    }
+
+    .asset-info{
+      min-width:0;
+    }
+
+    .asset-info strong{
+      display:block;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      color:var(--ink);
+      font-size:9px;
+      font-weight:750;
+    }
+
+    .asset-info span{
+      display:block;
+      margin-top:2px;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    /* =====================================================
+       INFORMATION SECTION
+       ===================================================== */
+
+    .information{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+    }
+
+    .information-card{
+      padding:20px;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      background:#fff;
+    }
+
+    .information-number{
+      color:var(--green);
+      font:
+        500 31px/1
+        Georgia,
+        "Times New Roman",
+        serif;
+    }
+
+    .information-card h3{
+      margin:9px 0 0;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .information-card p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.65;
+    }
+
+    /* =====================================================
+       FOOTER
+       ===================================================== */
+
+    footer{
+      border-top:1px solid var(--line);
+      background:#f1efe9;
+    }
+
+    .footer-inner{
+      min-height:90px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:20px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .footer-inner strong{
+      color:var(--ink-soft);
+    }
+
+    .footer-inner a{
+      color:var(--green);
+      font-weight:700;
+    }
+
+    /* =====================================================
+       TOAST
+       ===================================================== */
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:25px;
+      z-index:100;
+      transform:translate(-50%,15px);
+      opacity:0;
+      pointer-events:none;
+      padding:10px 14px;
+      border:1px solid #c7d8ce;
+      border-radius:8px;
+      background:#f6fbf8;
+      color:var(--green-dark);
+      box-shadow:var(--shadow);
+      font-size:10px;
+      font-weight:800;
+      transition:.22s ease;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translate(-50%,0);
+    }
+
+    .hidden{
+      display:none !important;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media(max-width:1050px){
+      .workspace{
+        grid-template-columns:1fr;
+      }
+
+      .workflow{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .workflow-step:nth-child(2){
+        border-right:0;
+      }
+
+      .workflow-step:nth-child(-n+2){
+        border-bottom:1px solid var(--line);
+      }
+    }
+
+    @media(max-width:700px){
+      .container{
+        width:min(var(--content),calc(100% - 22px));
+      }
+
+      .hero{
+        padding:50px 0 35px;
+      }
+
+      .hero h1{
+        font-size:43px;
+      }
+
+      .hero p{
+        font-size:14px;
+        line-height:1.7;
+      }
+
+      .workflow{
+        grid-template-columns:1fr;
+      }
+
+      .workflow-step{
+        border-right:0;
+        border-bottom:1px solid var(--line);
+      }
+
+      .workflow-step:last-child{
+        border-bottom:0;
+      }
+
+      .information{
+        grid-template-columns:1fr;
+      }
+
+      .browser-content{
+        min-height:270px;
+        padding:25px;
+      }
+
+      .preview-icon-large{
+        width:68px;
+        height:68px;
+        right:25px;
+        top:55px;
+      }
+
+      .header-meta .free-label{
+        display:none;
+      }
+
+      .footer-inner{
+        padding:25px 0;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+
+    <a href="#" class="brand">
+      <div class="brand-mark">F</div>
+
+      <div class="brand-text">
+        <span class="brand-name">Favicon Studio</span>
+        <span class="brand-subtitle">Open Web Utility</span>
+      </div>
+    </a>
+
+    <div class="header-meta">
+      <span class="free-label">
+        Free · No account · Local processing
+      </span>
+
+      <button
+        class="button button-primary"
+        id="navDownload"
+        type="button"
+      >
+        Download package
+      </button>
+    </div>
+
+  </div>
+</header>
+
+
+<main class="container">
+
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
+
+  <section class="hero">
+
+    <div class="section-label">
+      Favicon research &amp; generation tool
+    </div>
+
+    <h1>
+      Build a complete favicon system for your
+      <em>website.</em>
+    </h1>
+
+    <p>
+      Upload your source image, tell us exactly where the generated
+      files will live, and create a complete favicon package for
+      browsers, Apple devices, Android, PWAs, Safari and legacy
+      Windows environments.
+    </p>
+
+    <div class="hero-note">
+      <span>Runs entirely in your browser</span>
+      <span>No account required</span>
+      <span>No image upload</span>
+      <span>No watermark</span>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       WORKFLOW
+       ===================================================== -->
+
+  <section class="workflow">
+
+    <div class="workflow-step">
+      <span class="workflow-number">01</span>
+      <span class="workflow-title">Upload</span>
+      <span class="workflow-description">
+        Select your source artwork
+      </span>
+    </div>
+
+    <div class="workflow-step">
+      <span class="workflow-number">02</span>
+      <span class="workflow-title">Placement</span>
+      <span class="workflow-description">
+        Specify where the files will live
+      </span>
+    </div>
+
+    <div class="workflow-step">
+      <span class="workflow-number">03</span>
+      <span class="workflow-title">Configure</span>
+      <span class="workflow-description">
+        Choose formats and appearance
+      </span>
+    </div>
+
+    <div class="workflow-step">
+      <span class="workflow-number">04</span>
+      <span class="workflow-title">Download</span>
+      <span class="workflow-description">
+        Receive the complete deployment kit
+      </span>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       WORKSPACE
+       ===================================================== -->
+
+  <section class="workspace">
+
+
+    <!-- ===================================================
+         LEFT PANEL
+         =================================================== -->
+
+    <aside class="panel">
+
+      <div class="panel-header">
+        <h2>Favicon configuration</h2>
+        <p>
+          Define the source artwork, deployment location and
+          compatibility requirements.
+        </p>
+      </div>
+
+      <div class="panel-body">
+
+
+        <!-- SOURCE -->
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Source image</span>
+            <span class="field-help">
+              PNG · JPG · WebP · SVG
+            </span>
+          </div>
+
+          <div class="upload-box" id="dropZone">
+
+            <div class="upload-symbol">
+              ↑
+            </div>
+
+            <strong id="uploadTitle">
+              Choose or drop an image
+            </strong>
+
+            <p>
+              Your image is processed locally. It is never
+              uploaded to a server.
+            </p>
+
+            <button
+              class="button"
+              id="uploadButton"
+              type="button"
+            >
+              Select image
+            </button>
+
+            <div
+              class="upload-file hidden"
+              id="uploadFile"
+            ></div>
+
+            <input
+              id="fileInput"
+              type="file"
+              accept="image/png,image/jpeg,image/webp,image/svg+xml"
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- PLACEMENT -->
+
+        <div class="field">
+
+          <div class="placement">
+
+            <div class="placement-title">
+              File placement
+            </div>
+
+            <p class="placement-description">
+              Where will you place the generated favicon files
+              on your website? Enter the directory or URL that
+              will contain the files.
+            </p>
+
+            <div class="path-input">
+
+              <input
+                id="assetPath"
+                type="text"
+                placeholder="/assets/icons/"
+                autocomplete="off"
+              />
+
+            </div>
+
+            <div class="path-note">
+              Examples: /assets/icons/ · /images/favicon/ ·
+              assets/favicon/ · https://example.com/assets/icons/
+            </div>
+
+            <div
+              class="path-preview"
+              id="pathPreview"
+            >
+              Enter the file location above
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- TEXT -->
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Text fallback</span>
+            <span class="field-help">Optional</span>
+          </div>
+
+          <input
+            id="iconText"
+            type="text"
+            maxlength="3"
+            value="F"
+            placeholder="F"
+          />
+
+        </div>
+
+
+        <!-- WEBSITE -->
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Website name</span>
+          </div>
+
+          <input
+            id="siteName"
+            type="text"
+            value=""
+            placeholder="My Website"
+          />
+
+        </div>
+
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Website URL</span>
+            <span class="field-help">
+              Optional
+            </span>
+          </div>
+
+          <input
+            id="domain"
+            type="url"
+            value=""
+            placeholder="https://example.com"
+          />
+
+        </div>
+
+
+        <!-- COLORS -->
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Appearance</span>
+          </div>
+
+          <div class="color-grid">
+
+            <div>
+              <div class="field-label">
+                <span>Primary</span>
+              </div>
+
+              <input
+                id="color1"
+                type="color"
+                value="#315f50"
+              />
+            </div>
+
+            <div>
+              <div class="field-label">
+                <span>Secondary</span>
+              </div>
+
+              <input
+                id="color2"
+                type="color"
+                value="#42677d"
+              />
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- RADIUS -->
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Corner radius</span>
+
+            <span
+              class="field-help"
+              id="radiusValue"
+            >
+              24%
+            </span>
+          </div>
+
+          <input
+            id="radius"
+            type="range"
+            min="0"
+            max="50"
+            value="24"
+          />
+
+        </div>
+
+
+        <!-- PADDING -->
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Icon padding</span>
+
+            <span
+              class="field-help"
+              id="paddingValue"
+            >
+              16%
+            </span>
+          </div>
+
+          <input
+            id="padding"
+            type="range"
+            min="0"
+            max="35"
+            value="16"
+          />
+
+        </div>
+
+
+        <!-- PACKAGE -->
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Package scope</span>
+          </div>
+
+          <div class="mode-list">
+
+            <button
+              class="mode"
+              data-mode="modern"
+              type="button"
+            >
+              <span class="mode-radio"></span>
+
+              <span>
+                <strong>Modern essentials</strong>
+                <span>
+                  Current browser and PWA requirements.
+                </span>
+              </span>
+            </button>
+
+
+            <button
+              class="mode"
+              data-mode="full"
+              type="button"
+            >
+              <span class="mode-radio"></span>
+
+              <span>
+                <strong>Full web package</strong>
+                <span>
+                  Modern browsers plus Apple and Safari.
+                </span>
+              </span>
+            </button>
+
+
+            <button
+              class="mode"
+              data-mode="legacy"
+              type="button"
+            >
+              <span class="mode-radio"></span>
+
+              <span>
+                <strong>Legacy compatibility</strong>
+                <span>
+                  Apple, Safari and Windows compatibility.
+                </span>
+              </span>
+            </button>
+
+
+            <button
+              class="mode active"
+              data-mode="everything"
+              type="button"
+            >
+              <span class="mode-radio"></span>
+
+              <span>
+                <strong>Complete research package</strong>
+                <span>
+                  All available variants and metadata.
+                </span>
+              </span>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- OPTIONS -->
+
+        <div class="field">
+
+          <div class="field-label">
+            <span>Additional options</span>
+          </div>
+
+          <div class="options">
+
+            <label class="check">
+              <input
+                id="shadow"
+                type="checkbox"
+                checked
+              />
+              <span>
+                Soft icon shadow
+              </span>
+            </label>
+
+            <label class="check">
+              <input
+                id="transparent"
+                type="checkbox"
+              />
+              <span>
+                Transparent outer background
+              </span>
+            </label>
+
+            <label class="check">
+              <input
+                id="includeMono"
+                type="checkbox"
+                checked
+              />
+              <span>
+                Generate monochrome PWA icons
+              </span>
+            </label>
+
+          </div>
+
+        </div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="button-row">
+
+          <button
+            class="button"
+            id="resetButton"
+            type="button"
+          >
+            Reset
+          </button>
+
+          <button
+            class="button button-primary"
+            id="downloadButton"
+            type="button"
+          >
+            Download ZIP
+          </button>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================================
+         RIGHT COLUMN
+         =================================================== -->
+
+    <div class="main-column">
+
+
+      <!-- PREVIEW -->
+
+      <section class="panel preview">
+
+        <div class="preview-header">
+          <strong>Visual review</strong>
+
+          <span id="previewStatus">
+            Waiting for configuration
+          </span>
+        </div>
+
+
+        <div class="browser">
+
+          <div class="browser-top">
+
+            <div class="browser-controls">
+              <i></i>
+              <i></i>
+              <i></i>
+            </div>
+
+            <div class="browser-tab">
+
+              <img
+                id="tabIcon"
+                alt=""
+              />
+
+              <span id="tabTitle">
+                Your website
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="browser-content">
+
+            <div class="mock-line"></div>
+            <div class="mock-line short"></div>
+
+            <div
+              class="mock-paragraph"
+              style="margin-top:28px"
+            ></div>
+
+            <div class="mock-paragraph"></div>
+            <div class="mock-paragraph"></div>
+            <div class="mock-paragraph"></div>
+
+            <img
+              id="bigPreview"
+              class="preview-icon-large"
+              alt="Favicon preview"
+            />
+
+          </div>
+
+        </div>
+
+
+        <div class="preview-foot">
+
+          <div class="preview-size">
+            <img
+              id="mini16"
+              style="--size:28px"
+              alt=""
+            />
+            <span>16 px</span>
+          </div>
+
+          <div class="preview-size">
+            <img
+              id="mini32"
+              style="--size:40px"
+              alt=""
+            />
+            <span>32 px</span>
+          </div>
+
+          <div class="preview-size">
+            <img
+              id="mini64"
+              style="--size:56px"
+              alt=""
+            />
+            <span>64 px</span>
+          </div>
+
+        </div>
+
+        <div style="height:20px"></div>
+
+      </section>
+
+
+      <!-- CODE -->
+
+      <section class="panel">
+
+        <div class="code-tabs">
+
+          <button
+            class="code-tab active"
+            data-code="head"
+            type="button"
+          >
+            HEAD
+          </button>
+
+          <button
+            class="code-tab"
+            data-code="manifest"
+            type="button"
+          >
+            WEB MANIFEST
+          </button>
+
+          <button
+            class="code-tab"
+            data-code="browserconfig"
+            type="button"
+          >
+            BROWSER CONFIG
+          </button>
+
+          <button
+            class="code-tab"
+            data-code="safari"
+            type="button"
+          >
+            SAFARI SVG
+          </button>
+
+          <button
+            class="code-tab"
+            data-code="readme"
+            type="button"
+          >
+            README
+          </button>
+
+        </div>
+
+
+        <div class="code-container">
+
+          <button
+            class="button copy-button"
+            id="copyButton"
+            type="button"
+          >
+            Copy
+          </button>
+
+          <pre
+            class="code"
+            id="codeOutput"
+          ></pre>
+
+        </div>
+
+      </section>
+
+
+      <!-- ASSETS -->
+
+      <section class="panel">
+
+        <div class="asset-header">
+
+          <h2>
+            Generated assets
+          </h2>
+
+          <span
+            class="asset-count"
+            id="assetCount"
+          >
+            0 files
+          </span>
+
+        </div>
+
+        <div
+          class="asset-grid"
+          id="assetGrid"
+        ></div>
+
+      </section>
+
+
+      <!-- INFORMATION -->
+
+      <section class="information">
+
+        <article class="information-card">
+
+          <div class="information-number">
+            50+
+          </div>
+
+          <h3>
+            Generated variants
+          </h3>
+
+          <p>
+            Browser favicons, Apple Touch Icons, Android and
+            PWA variants, Safari assets and Windows tiles.
+          </p>
+
+        </article>
+
+
+        <article class="information-card">
+
+          <div class="information-number">
+            0
+          </div>
+
+          <h3>
+            Server uploads
+          </h3>
+
+          <p>
+            Image processing takes place entirely in your
+            browser. Your source image stays on your device.
+          </p>
+
+        </article>
+
+
+        <article class="information-card">
+
+          <div class="information-number">
+            ZIP
+          </div>
+
+          <h3>
+            Deployment package
+          </h3>
+
+          <p>
+            Download the generated images together with the
+            manifest, configuration files and integration code.
+          </p>
+
+        </article>
+
+      </section>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div>
+      © <span id="year"></span>
+      <strong>Nicholas Van-Orton</strong>
+    </div>
+
+    <div>
+      Free favicon generator ·
+      <a href="mailto:nvo@nvo987.us">
+        nvo@nvo987.us
+      </a>
+    </div>
+
+  </div>
+
+</footer>
+
+
+<div
+  class="toast"
+  id="toast"
+>
+  Copied
+</div>
+
+
+<script>
+"use strict";
+
+/* =========================================================
+   FAVICON STUDIO
+   CLIENT-SIDE FAVICON GENERATOR
+   ========================================================= */
+
+const $ = id => document.getElementById(id);
+
+let currentMode = "everything";
+let uploadedImage = null;
+let uploadedFileName = "";
+let activeCode = "head";
+let toastTimer;
+
+
+/* =========================================================
+   ASSET DEFINITIONS
+   ========================================================= */
+
+const MODERN = [
+
+  ["favicon.svg","SVG","Vector favicon"],
+
+  ["favicon.ico","ICO","Multi-size favicon"],
+
+  ["favicon-16x16.png","16×16","Browser favicon"],
+  ["favicon-24x24.png","24×24","Browser / legacy"],
+  ["favicon-32x32.png","32×32","Browser favicon"],
+  ["favicon-48x48.png","48×48","Browser / Windows"],
+  ["favicon-64x64.png","64×64","High density"],
+
+  ["apple-touch-icon.png","180×180","Apple Touch Icon"],
+
+  ["android-chrome-192x192.png","192×192","Android / PWA"],
+  ["android-chrome-512x512.png","512×512","Android / PWA"],
+
+  [
+    "android-chrome-maskable-192x192.png",
+    "192×192",
+    "PWA maskable"
+  ],
+
+  [
+    "android-chrome-maskable-512x512.png",
+    "512×512",
+    "PWA maskable"
+  ],
+
+  [
+    "android-chrome-monochrome-192x192.png",
+    "192×192",
+    "PWA monochrome"
+  ],
+
+  [
+    "android-chrome-monochrome-512x512.png",
+    "512×512",
+    "PWA monochrome"
+  ],
+
+  ["site.webmanifest","JSON","Web App Manifest"]
+
+];
+
+
+const APPLE = [
+
+  [
+    "apple-touch-icon-57x57.png",
+    "57×57",
+    "Legacy Apple"
+  ],
+
+  [
+    "apple-touch-icon-60x60.png",
+    "60×60",
+    "Legacy Apple"
+  ],
+
+  [
+    "apple-touch-icon-72x72.png",
+    "72×72",
+    "Legacy Apple"
+  ],
+
+  [
+    "apple-touch-icon-76x76.png",
+    "76×76",
+    "Legacy Apple"
+  ],
+
+  [
+    "apple-touch-icon-114x114.png",
+    "114×114",
+    "Legacy Retina"
+  ],
+
+  [
+    "apple-touch-icon-120x120.png",
+    "120×120",
+    "Legacy Retina"
+  ],
+
+  [
+    "apple-touch-icon-144x144.png",
+    "144×144",
+    "Legacy Retina"
+  ],
+
+  [
+    "apple-touch-icon-152x152.png",
+    "152×152",
+    "Legacy Retina"
+  ],
+
+  [
+    "apple-touch-icon-167x167.png",
+    "167×167",
+    "iPad Pro"
+  ],
+
+  [
+    "apple-touch-icon-180x180.png",
+    "180×180",
+    "Modern Apple"
+  ]
+
+];
+
+
+const WINDOWS = [
+
+  [
+    "mstile-70x70.png",
+    "70×70",
+    "Windows tile"
+  ],
+
+  [
+    "mstile-144x144.png",
+    "144×144",
+    "Windows tile"
+  ],
+
+  [
+    "mstile-150x150.png",
+    "150×150",
+    "Windows tile"
+  ],
+
+  [
+    "mstile-310x150.png",
+    "310×150",
+    "Windows wide tile"
+  ],
+
+  [
+    "mstile-310x310.png",
+    "310×310",
+    "Windows large tile"
+  ],
+
+  [
+    "browserconfig.xml",
+    "XML",
+    "Windows configuration"
+  ]
+
+];
+
+
+const SAFARI = [
+
+  [
+    "safari-pinned-tab.svg",
+    "SVG",
+    "Safari pinned tab"
+  ]
+
+];
+
+
+const EXTENDED = [
+
+  ["favicon-70x70.png","70×70","Extended"],
+  ["favicon-72x72.png","72×72","Extended"],
+  ["favicon-76x76.png","76×76","Extended"],
+  ["favicon-96x96.png","96×96","Extended"],
+  ["favicon-114x114.png","114×114","Extended"],
+  ["favicon-120x120.png","120×120","Extended"],
+  ["favicon-128x128.png","128×128","Extended"],
+  ["favicon-144x144.png","144×144","Extended"],
+  ["favicon-150x150.png","150×150","Extended"],
+  ["favicon-152x152.png","152×152","Extended"],
+  ["favicon-167x167.png","167×167","Extended"],
+  ["favicon-180x180.png","180×180","Extended"],
+  ["favicon-192x192.png","192×192","Extended"],
+  ["favicon-195x195.png","195×195","Extended"],
+  ["favicon-228x228.png","228×228","Extended"],
+  ["favicon-256x256.png","256×256","Extended"],
+  ["favicon-310x150.png","310×150","Extended"],
+  ["favicon-310x310.png","310×310","Extended"],
+  ["favicon-384x384.png","384×384","Extended"],
+  ["favicon-512x512.png","512×512","Extended"]
+
+];
+
+
+function getAssets(){
+
+  if(currentMode === "modern"){
+    return [...MODERN];
+  }
+
+  if(currentMode === "full"){
+    return [
+      ...MODERN,
+      ...APPLE,
+      ...SAFARI
+    ];
+  }
+
+  if(currentMode === "legacy"){
+    return [
+      ...MODERN,
+      ...APPLE,
+      ...WINDOWS,
+      ...SAFARI
+    ];
+  }
+
+  return [
+    ...MODERN,
+    ...APPLE,
+    ...WINDOWS,
+    ...SAFARI,
+    ...EXTENDED
+  ];
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+function settings(){
+
+  return {
+
+    text:
+      $("iconText").value.trim() || "F",
+
+    siteName:
+      $("siteName").value.trim() || "My Website",
+
+    domain:
+      $("domain").value.trim(),
+
+    assetPath:
+      $("assetPath").value.trim(),
+
+    color1:
+      $("color1").value,
+
+    color2:
+      $("color2").value,
+
+    radius:
+      Number($("radius").value),
+
+    padding:
+      Number($("padding").value),
+
+    shadow:
+      $("shadow").checked,
+
+    transparent:
+      $("transparent").checked,
+
+    monochrome:
+      $("includeMono").checked
+
+  };
+
+}
+
+
+/* =========================================================
+   PATH HANDLING
+   ========================================================= */
+
+function normalizeAssetPath(){
+
+  let path = settings().assetPath.trim();
+
+  if(!path){
+    return "";
+  }
+
+  path = path.replace(/\\/g,"/");
+
+  while(path.includes("//")){
+    path = path.replace("//","/");
+  }
+
+  /*
+    Restore protocol separator if a full URL was supplied.
+  */
+  path = path.replace(/^https:\//,"https://");
+  path = path.replace(/^http:\//,"http://");
+
+  if(!path.endsWith("/")){
+    path += "/";
+  }
+
+  return path;
+}
+
+
+function assetURL(filename){
+
+  const base = normalizeAssetPath();
+
+  if(!base){
+    return filename;
+  }
+
+  return base + filename;
+}
+
+
+/*
+  Converts a URL/path into a value suitable for generated
+  manifest/config files.
+
+  The generator deliberately uses the exact placement supplied
+  by the user instead of assuming a website root.
+*/
+function assetReference(filename){
+
+  return assetURL(filename);
+
+}
+
+
+/* =========================================================
+   XML / JSON HELPERS
+   ========================================================= */
+
+function escapeXML(value){
+
+  return String(value)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&apos;");
+
+}
+
+
+function escapeJSON(value){
+
+  return String(value)
+    .replace(/\\/g,"\\\\")
+    .replace(/"/g,'\\"');
+
+}
+
+
+function hexToRgb(hex){
+
+  const h = hex.replace("#","");
+
+  return {
+
+    r:parseInt(
+      h.substring(0,2),
+      16
+    ),
+
+    g:parseInt(
+      h.substring(2,4),
+      16
+    ),
+
+    b:parseInt(
+      h.substring(4,6),
+      16
+    )
+
+  };
+
+}
+
+
+function rgba(hex,a){
+
+  const c = hexToRgb(hex);
+
+  return `rgba(${c.r},${c.g},${c.b},${a})`;
+
+}
+
+
+function clamp(
+  number,
+  min,
+  max
+){
+
+  return Math.max(
+    min,
+    Math.min(max,number)
+  );
+
+}
+
+
+function filenameSize(name){
+
+  const match =
+    name.match(/(\d+)x(\d+)/i);
+
+  if(!match){
+    return null;
+  }
+
+  return {
+
+    width:Number(match[1]),
+    height:Number(match[2])
+
+  };
+
+}
+
+
+function isWideTile(name){
+
+  return /310x150/i.test(name);
+
+}
+
+
+/* =========================================================
+   SVG GENERATION
+   ========================================================= */
+
+function createSVG(options = {}){
+
+  const s = settings();
+
+  const monochrome =
+    !!options.monochrome;
+
+  const safari =
+    !!options.safari;
+
+
+  if(safari){
+
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+>
+  <path
+    fill="#000000"
+    d="${safariPath()}"
+  />
+</svg>`;
+
+  }
+
+
+  const radius =
+    clamp(s.radius,0,50);
+
+  const padding =
+    clamp(s.padding,0,35);
+
+  const inset =
+    padding;
+
+  const size =
+    100 - padding * 2;
+
+  const rounded =
+    size * radius / 100;
+
+
+  const fill =
+    monochrome
+      ? "#ffffff"
+      : "url(#gradient)";
+
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+  role="img"
+  aria-label="${escapeXML(s.siteName)}"
+>
+  <defs>
+
+    <linearGradient
+      id="gradient"
+      x1="0%"
+      y1="0%"
+      x2="100%"
+      y2="100%"
+    >
+      <stop
+        offset="0%"
+        stop-color="${escapeXML(s.color1)}"
+      />
+
+      <stop
+        offset="100%"
+        stop-color="${escapeXML(s.color2)}"
+      />
+    </linearGradient>
+
+    <filter
+      id="shadow"
+      x="-30%"
+      y="-30%"
+      width="160%"
+      height="160%"
+    >
+      <feDropShadow
+        dx="0"
+        dy="5"
+        stdDeviation="5"
+        flood-color="#000000"
+        flood-opacity=".25"
+      />
+    </filter>
+
+  </defs>
+
+  <rect
+    x="${inset}"
+    y="${inset}"
+    width="${size}"
+    height="${size}"
+    rx="${rounded}"
+    fill="${fill}"
+    ${
+      s.shadow && !monochrome
+        ? 'filter="url(#shadow)"'
+        : ""
+    }
+    ${
+      monochrome
+        ? ""
+        : 'stroke="#ffffff" stroke-opacity=".16"'
+    }
+  />
+
+  <text
+    x="50"
+    y="54"
+    text-anchor="middle"
+    dominant-baseline="middle"
+    font-family="Arial, Helvetica, sans-serif"
+    font-size="${s.text.length > 2 ? 30 : 42}"
+    font-weight="800"
+    fill="${monochrome ? "#000000" : "#ffffff"}"
+  >${escapeXML(
+    s.text.substring(0,3)
+  )}</text>
+
+</svg>`;
+
+}
+
+
+function safariPath(){
+
+  return "M50 8C26.8 8 8 26.8 8 50s18.8 42 42 42 42-18.8 42-42S73.2 8 50 8zm0 8c18.8 0 34 15.2 34 34S68.8 84 50 84 16 68.8 16 50s15.2-34 34-34zm-7.2 10.5L37 47l-15 8 22 1 6 19 7-18 17-6-20-3-4-20z";
+
+}
+
+
+/* =========================================================
+   CANVAS RENDERING
+   ========================================================= */
+
+function drawIcon(
+  size,
+  options = {}
+){
+
+  const s = settings();
+
+  const canvas =
+    document.createElement("canvas");
+
+  canvas.width = size;
+  canvas.height = size;
+
+  const ctx =
+    canvas.getContext("2d");
+
+  ctx.clearRect(
+    0,
+    0,
+    size,
+    size
+  );
+
+
+  const wide =
+    !!options.wide;
+
+  const maskable =
+    !!options.maskable;
+
+  const monochrome =
+    !!options.monochrome;
+
+  const transparent =
+    s.transparent && !wide;
+
+
+  if(!transparent){
+
+    const background =
+      ctx.createLinearGradient(
+        0,
+        0,
+        size,
+        size
+      );
+
+    background.addColorStop(
+      0,
+      s.color1
+    );
+
+    background.addColorStop(
+      1,
+      s.color2
+    );
+
+    ctx.fillStyle =
+      background;
+
+
+    if(wide){
+
+      ctx.fillRect(
+        0,
+        0,
+        size,
+        size
+      );
+
+    }else{
+
+      roundedRect(
+        ctx,
+        0,
+        0,
+        size,
+        size,
+        size *
+        clamp(
+          s.radius,
+          0,
+          50
+        ) /
+        100
+      );
+
+      ctx.fill();
+
+    }
+
+  }
+
+
+  const paddingFactor =
+    maskable
+      ? .08
+      : s.padding / 100;
+
+  const iconSize =
+    size *
+    (1 - paddingFactor * 2);
+
+  const x =
+    (size-iconSize)/2;
+
+  const y =
+    (size-iconSize)/2;
+
+
+  if(uploadedImage){
+
+    drawUploadedImage(
+      ctx,
+      x,
+      y,
+      iconSize,
+      iconSize
+    );
+
+  }else{
+
+    const gradient =
+      ctx.createLinearGradient(
+        x,
+        y,
+        x + iconSize,
+        y + iconSize
+      );
+
+    gradient.addColorStop(
+      0,
+      s.color1
+    );
+
+    gradient.addColorStop(
+      1,
+      s.color2
+    );
+
+
+    if(!transparent && !wide){
+
+      ctx.fillStyle =
+        monochrome
+          ? "#ffffff"
+          : gradient;
+
+
+      roundedRect(
+        ctx,
+        x,
+        y,
+        iconSize,
+        iconSize,
+        iconSize *
+        clamp(
+          s.radius,
+          0,
+          50
+        ) /
+        100
+      );
+
+
+      if(
+        s.shadow &&
+        !monochrome
+      ){
+
+        ctx.save();
+
+        ctx.shadowColor =
+          "rgba(0,0,0,.25)";
+
+        ctx.shadowBlur =
+          size*.055;
+
+        ctx.shadowOffsetY =
+          size*.025;
+
+        ctx.fill();
+
+        ctx.restore();
+
+      }else{
+
+        ctx.fill();
+
+      }
+
+    }
+
+
+    ctx.fillStyle =
+      monochrome
+        ? "#000000"
+        : "#ffffff";
+
+    ctx.textAlign =
+      "center";
+
+    ctx.textBaseline =
+      "middle";
+
+    ctx.font =
+      `800 ${
+        Math.round(
+          iconSize *
+          (
+            s.text.length > 2
+              ? .30
+              : .43
+          )
+        )
+      }px Arial`;
+
+
+    ctx.fillText(
+      s.text.substring(0,3),
+      size/2,
+      size/2 + size*.015
+    );
+
+  }
+
+
+  return canvas;
+
+}
+
+
+function drawUploadedImage(
+  ctx,
+  x,
+  y,
+  width,
+  height
+){
+
+  const imageWidth =
+    uploadedImage.naturalWidth ||
+    uploadedImage.width;
+
+  const imageHeight =
+    uploadedImage.naturalHeight ||
+    uploadedImage.height;
+
+
+  const scale =
+    Math.min(
+      width / imageWidth,
+      height / imageHeight
+    );
+
+
+  const drawWidth =
+    imageWidth * scale;
+
+  const drawHeight =
+    imageHeight * scale;
+
+
+  const drawX =
+    x +
+    (width - drawWidth) / 2;
+
+  const drawY =
+    y +
+    (height - drawHeight) / 2;
+
+
+  ctx.drawImage(
+    uploadedImage,
+    drawX,
+    drawY,
+    drawWidth,
+    drawHeight
+  );
+
+}
+
+
+function roundedRect(
+  ctx,
+  x,
+  y,
+  width,
+  height,
+  radius
+){
+
+  const r =
+    Math.min(
+      radius,
+      width/2,
+      height/2
+    );
+
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    x+r,
+    y
+  );
+
+  ctx.arcTo(
+    x+width,
+    y,
+    x+width,
+    y+height,
+    r
+  );
+
+  ctx.arcTo(
+    x+width,
+    y+height,
+    x,
+    y+height,
+    r
+  );
+
+  ctx.arcTo(
+    x,
+    y+height,
+    x,
+    y,
+    r
+  );
+
+  ctx.arcTo(
+    x,
+    y,
+    x+width,
+    y,
+    r
+  );
+
+  ctx.closePath();
+
+}
+
+
+/* =========================================================
+   BINARY HELPERS
+   ========================================================= */
+
+function canvasPNG(canvas){
+
+  const dataURL =
+    canvas.toDataURL("image/png");
+
+  const base64 =
+    dataURL.split(",")[1];
+
+  return base64ToUint8(base64);
+
+}
+
+
+function base64ToUint8(base64){
+
+  const raw =
+    atob(base64);
+
+  const array =
+    new Uint8Array(
+      raw.length
+    );
+
+
+  for(
+    let i=0;
+    i<raw.length;
+    i++
+  ){
+
+    array[i] =
+      raw.charCodeAt(i);
+
+  }
+
+
+  return array;
+
+}
+
+
+function textBytes(text){
+
+  return new TextEncoder()
+    .encode(text);
+
+}
+
+
+function concatBytes(...arrays){
+
+  const total =
+    arrays.reduce(
+      (sum,array) =>
+        sum + array.length,
+      0
+    );
+
+
+  const result =
+    new Uint8Array(total);
+
+  let offset = 0;
+
+
+  for(const array of arrays){
+
+    result.set(
+      array,
+      offset
+    );
+
+    offset +=
+      array.length;
+
+  }
+
+
+  return result;
+
+}
+
+
+function u16(number){
+
+  return new Uint8Array([
+
+    number & 255,
+
+    (number >>> 8) & 255
+
+  ]);
+
+}
+
+
+function u32(number){
+
+  return new Uint8Array([
+
+    number & 255,
+
+    (number >>> 8) & 255,
+
+    (number >>> 16) & 255,
+
+    (number >>> 24) & 255
+
+  ]);
+
+}
+
+
+/* =========================================================
+   CRC32
+   ========================================================= */
+
+const CRC_TABLE =
+  (() => {
+
+    const table =
+      new Uint32Array(256);
+
+
+    for(
+      let n=0;
+      n<256;
+      n++
+    ){
+
+      let c=n;
+
+
+      for(
+        let k=0;
+        k<8;
+        k++
+      ){
+
+        c =
+          (c & 1)
+            ? (
+                0xEDB88320 ^
+                (c >>> 1)
+              )
+            : (
+                c >>> 1
+              );
+
+      }
+
+
+      table[n] =
+        c >>> 0;
+
+    }
+
+
+    return table;
+
+  })();
+
+
+function crc32(data){
+
+  let crc =
+    0xffffffff;
+
+
+  for(
+    let i=0;
+    i<data.length;
+    i++
+  ){
+
+    crc =
+      CRC_TABLE[
+        (crc ^ data[i]) & 0xff
+      ] ^
+      (crc >>> 8);
+
+  }
+
+
+  return (
+    crc ^
+    0xffffffff
+  ) >>> 0;
+
+}
+
+
+/* =========================================================
+   ICO
+   ========================================================= */
+
+function createICO(){
+
+  const sizes =
+    [16,24,32,48,64];
+
+
+  const images =
+    sizes.map(size => ({
+
+      size,
+
+      data:
+        canvasPNG(
+          drawIcon(size)
+        )
+
+    }));
+
+
+  const header =
+    new Uint8Array([
+
+      0,0,
+      1,0,
+      images.length,
+      0
+
+    ]);
+
+
+  const directories=[];
+  const imageData=[];
+
+
+  let offset =
+    6 +
+    images.length *
+    16;
+
+
+  for(const image of images){
+
+    const sizeByte =
+      image.size >= 256
+        ? 0
+        : image.size;
+
+
+    const entry =
+      concatBytes(
+
+        new Uint8Array([
+          sizeByte,
+          sizeByte
+        ]),
+
+        new Uint8Array([
+          0,
+          0
+        ]),
+
+        new Uint8Array([
+          1,
+          0
+        ]),
+
+        new Uint8Array([
+          32,
+          0
+        ]),
+
+        u32(
+          image.data.length
+        ),
+
+        u32(
+          offset
+        )
+
+      );
+
+
+    directories.push(entry);
+
+    imageData.push(
+      image.data
+    );
+
+
+    offset +=
+      image.data.length;
+
+  }
+
+
+  return concatBytes(
+    header,
+    ...directories,
+    ...imageData
+  );
+
+}
+
+
+/* =========================================================
+   WEB MANIFEST
+   ========================================================= */
+
+function createManifest(){
+
+  const s =
+    settings();
+
+
+  const icons = [
+
+    {
+      src:assetReference(
+        "android-chrome-192x192.png"
+      ),
+      sizes:"192x192",
+      type:"image/png",
+      purpose:"any"
+    },
+
+    {
+      src:assetReference(
+        "android-chrome-512x512.png"
+      ),
+      sizes:"512x512",
+      type:"image/png",
+      purpose:"any"
+    },
+
+    {
+      src:assetReference(
+        "android-chrome-maskable-192x192.png"
+      ),
+      sizes:"192x192",
+      type:"image/png",
+      purpose:"maskable"
+    },
+
+    {
+      src:assetReference(
+        "android-chrome-maskable-512x512.png"
+      ),
+      sizes:"512x512",
+      type:"image/png",
+      purpose:"maskable"
+    }
+
+  ];
+
+
+  if(s.monochrome){
+
+    icons.push({
+
+      src:
+        assetReference(
+          "android-chrome-monochrome-192x192.png"
+        ),
+
+      sizes:"192x192",
+
+      type:"image/png",
+
+      purpose:"monochrome"
+
+    });
+
+
+    icons.push({
+
+      src:
+        assetReference(
+          "android-chrome-monochrome-512x512.png"
+        ),
+
+      sizes:"512x512",
+
+      type:"image/png",
+
+      purpose:"monochrome"
+
+    });
+
+  }
+
+
+  return JSON.stringify(
+
+    {
+
+      name:
+        s.siteName,
+
+      short_name:
+        s.siteName.substring(0,12),
+
+      description:
+        `Icons and web app manifest for ${s.siteName}`,
+
+      id:
+        assetReference(""),
+
+      start_url:
+        s.domain || "/",
+
+      scope:
+        "/",
+
+      display:
+        "standalone",
+
+      orientation:
+        "any",
+
+      background_color:
+        s.color1,
+
+      theme_color:
+        s.color1,
+
+      icons
+
+    },
+
+    null,
+
+    2
+
+  );
+
+}
+
+
+/* =========================================================
+   WINDOWS CONFIGURATION
+   ========================================================= */
+
+function createBrowserConfig(){
+
+  const s =
+    settings();
+
+
+  return `<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+
+      <square70x70logo
+        src="${escapeXML(
+          assetReference(
+            "mstile-70x70.png"
+          )
+        )}"
+      />
+
+      <square150x150logo
+        src="${escapeXML(
+          assetReference(
+            "mstile-150x150.png"
+          )
+        )}"
+      />
+
+      <wide310x150logo
+        src="${escapeXML(
+          assetReference(
+            "mstile-310x150.png"
+          )
+        )}"
+      />
+
+      <square310x310logo
+        src="${escapeXML(
+          assetReference(
+            "mstile-310x310.png"
+          )
+        )}"
+      />
+
+      <TileColor>
+        ${escapeXML(s.color1)}
+      </TileColor>
+
+    </tile>
+  </msapplication>
+</browserconfig>`;
+
+}
+
+
+/* =========================================================
+   HEAD GENERATOR
+   ========================================================= */
+
+function createHead(){
+
+  const s =
+    settings();
+
+
+  let output =
+`<!--
+  Favicon Studio
+  Generated favicon integration
+-->`;
+
+
+  if(s.domain){
+
+    output +=
+`\n<!-- Website: ${escapeXML(
+  s.domain
+)} -->`;
+
+  }
+
+
+  output +=
+`
+
+<link
+  rel="icon"
+  href="${escapeXML(
+    assetReference("favicon.ico")
+  )}"
+  sizes="any"
+>
+
+<link
+  rel="icon"
+  type="image/svg+xml"
+  href="${escapeXML(
+    assetReference("favicon.svg")
+  )}"
+>
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="16x16"
+  href="${escapeXML(
+    assetReference("favicon-16x16.png")
+  )}"
+>
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="${escapeXML(
+    assetReference("favicon-32x32.png")
+  )}"
+>
+
+<link
+  rel="icon"
+  type="image/png"
+  sizes="48x48"
+  href="${escapeXML(
+    assetReference("favicon-48x48.png")
+  )}"
+>
+
+<link
+  rel="apple-touch-icon"
+  sizes="180x180"
+  href="${escapeXML(
+    assetReference("apple-touch-icon.png")
+  )}"
+>
+
+<link
+  rel="manifest"
+  href="${escapeXML(
+    assetReference("site.webmanifest")
+  )}"
+>
+
+<meta
+  name="theme-color"
+  content="${escapeXML(s.color1)}"
+>`;
+
+
+  if(
+    currentMode === "full" ||
+    currentMode === "legacy" ||
+    currentMode === "everything"
+  ){
+
+    output +=
+`
+
+<link
+  rel="mask-icon"
+  href="${escapeXML(
+    assetReference(
+      "safari-pinned-tab.svg"
+    )
+  )}"
+  color="${escapeXML(s.color1)}"
+>`;
+
+  }
+
+
+  if(
+    currentMode === "legacy" ||
+    currentMode === "everything"
+  ){
+
+    output +=
+`
+
+<meta
+  name="msapplication-config"
+  content="${escapeXML(
+    assetReference(
+      "browserconfig.xml"
+    )
+  )}"
+>
+
+<meta
+  name="msapplication-TileColor"
+  content="${escapeXML(s.color1)}"
+>
+
+<meta
+  name="msapplication-TileImage"
+  content="${escapeXML(
+    assetReference(
+      "mstile-150x150.png"
+    )
+  )}"
+>`;
+
+  }
+
+
+  return output + "\n";
+
+}
+
+
+/* =========================================================
+   README
+   ========================================================= */
+
+function createReadme(){
+
+  const s =
+    settings();
+
+  const path =
+    normalizeAssetPath() ||
+    "Not specified";
+
+
+  return `FAVICON STUDIO
+================
+
+Generated favicon deployment package
+
+WEBSITE
+-------
+${s.domain || "Not specified"}
+
+WEBSITE NAME
+------------
+${s.siteName}
+
+ASSET LOCATION
+--------------
+${path}
+
+INSTALLATION
+------------
+
+1. Upload the generated files to the asset location specified
+   above.
+
+2. Open head.html.
+
+3. Copy the generated integration code into the <head>
+   section of your website.
+
+4. Keep the generated file structure unchanged unless you
+   intentionally move individual assets.
+
+5. If you move the assets after generation, update the paths
+   in head.html, site.webmanifest and browserconfig.xml.
+
+GENERATED FILES
+---------------
+
+- favicon.ico
+- favicon.svg
+- browser PNG sizes
+- Apple Touch Icons
+- Android / PWA icons
+- maskable PWA icons
+- monochrome PWA icons
+- Safari pinned-tab SVG
+- Windows tile images
+- browserconfig.xml
+- site.webmanifest
+- head.html
+- README.txt
+
+PRIVACY
+-------
+
+This generator processes images locally in your browser.
+
+The uploaded image is not sent to a server.
+
+No account is required.
+
+No watermark is added.
+
+ABOUT
+-----
+
+Favicon Studio is a free browser-based favicon generation
+utility.
+
+Generated by Favicon Studio.
+
+Nicholas Van-Orton
+nvo@nvo987.us
+`;
+
+}
+
+
+/* =========================================================
+   ZIP CREATOR
+   ========================================================= */
+
+function zipCreate(files){
+
+  const localParts=[];
+  const centralParts=[];
+
+  let offset=0;
+
+
+  const now =
+    new Date();
+
+
+  const dosTime =
+    (now.getHours()<<11) |
+    (now.getMinutes()<<5) |
+    Math.floor(
+      now.getSeconds()/2
+    );
+
+
+  const dosDate =
+    (
+      (now.getFullYear()-1980)
+      << 9
+    ) |
+    (
+      (now.getMonth()+1)
+      << 5
+    ) |
+    now.getDate();
+
+
+  for(const file of files){
+
+    const nameBytes =
+      textBytes(file.name);
+
+
+    const data =
+      file.data instanceof Uint8Array
+        ? file.data
+        : textBytes(file.data);
+
+
+    const crc =
+      crc32(data);
+
+
+    const localHeader =
+      concatBytes(
+
+        u32(0x04034b50),
+
+        u16(20),
+
+        u16(0),
+
+        u16(0),
+
+        u16(dosTime),
+
+        u16(dosDate),
+
+        u32(crc),
+
+        u32(data.length),
+
+        u32(data.length),
+
+        u16(nameBytes.length),
+
+        u16(0),
+
+        nameBytes
+
+      );
+
+
+    localParts.push(
+      localHeader,
+      data
+    );
+
+
+    const centralHeader =
+      concatBytes(
+
+        u32(0x02014b50),
+
+        u16(20),
+
+        u16(20),
+
+        u16(0),
+
+        u16(0),
+
+        u16(dosTime),
+
+        u16(dosDate),
+
+        u32(crc),
+
+        u32(data.length),
+
+        u32(data.length),
+
+        u16(nameBytes.length),
+
+        u16(0),
+
+        u16(0),
+
+        u16(0),
+
+        u16(0),
+
+        u32(0),
+
+        u32(offset),
+
+        nameBytes
+
+      );
+
+
+    centralParts.push(
+      centralHeader
+    );
+
+
+    offset +=
+      localHeader.length +
+      data.length;
+
+  }
+
+
+  const local =
+    concatBytes(
+      ...localParts
+    );
+
+
+  const central =
+    concatBytes(
+      ...centralParts
+    );
+
+
+  const end =
+    concatBytes(
+
+      u32(0x06054b50),
+
+      u16(0),
+
+      u16(0),
+
+      u16(files.length),
+
+      u16(files.length),
+
+      u32(central.length),
+
+      u32(local.length),
+
+      u16(0)
+
+    );
+
+
+  return concatBytes(
+    local,
+    central,
+    end
+  );
+
+}
+
+
+/* =========================================================
+   FILE GENERATION
+   ========================================================= */
+
+async function generateFiles(){
+
+  const assets =
+    getAssets();
+
+  const files=[];
+
+
+  for(const [name] of assets){
+
+
+    if(name === "favicon.svg"){
+
+      files.push({
+
+        name,
+
+        data:
+          textBytes(
+            createSVG()
+          )
+
+      });
+
+      continue;
+
+    }
+
+
+    if(
+      name ===
+      "safari-pinned-tab.svg"
+    ){
+
+      files.push({
+
+        name,
+
+        data:
+          textBytes(
+            createSVG({
+              safari:true
+            })
+          )
+
+      });
+
+      continue;
+
+    }
+
+
+    if(
+      name ===
+      "site.webmanifest"
+    ){
+
+      files.push({
+
+        name,
+
+        data:
+          textBytes(
+            createManifest()
+          )
+
+      });
+
+      continue;
+
+    }
+
+
+    if(
+      name ===
+      "browserconfig.xml"
+    ){
+
+      files.push({
+
+        name,
+
+        data:
+          textBytes(
+            createBrowserConfig()
+          )
+
+      });
+
+      continue;
+
+    }
+
+
+    if(
+      name ===
+      "favicon.ico"
+    ){
+
+      files.push({
+
+        name,
+
+        data:
+          createICO()
+
+      });
+
+      continue;
+
+    }
+
+
+    const size =
+      filenameSize(name);
+
+
+    if(size){
+
+      const lower =
+        name.toLowerCase();
+
+
+      const options = {
+
+        wide:
+          isWideTile(name),
+
+        maskable:
+          lower.includes(
+            "maskable"
+          ),
+
+        monochrome:
+          lower.includes(
+            "monochrome"
+          )
+
+      };
+
+
+      if(options.wide){
+
+        options.maskable =
+          false;
+
+      }
+
+
+      const canvas =
+        drawIcon(
+          Math.max(
+            size.width,
+            size.height
+          ),
+          options
+        );
+
+
+      let outputCanvas =
+        canvas;
+
+
+      if(
+        size.width !==
+        size.height
+      ){
+
+        outputCanvas =
+          document.createElement(
+            "canvas"
+          );
+
+        outputCanvas.width =
+          size.width;
+
+        outputCanvas.height =
+          size.height;
+
+
+        const ctx =
+          outputCanvas.getContext(
+            "2d"
+          );
+
+
+        const sourceSize =
+          Math.min(
+            size.width,
+            size.height
+          );
+
+
+        const sourceX =
+          (
+            canvas.width -
+            sourceSize
+          ) / 2;
+
+
+        const sourceY =
+          (
+            canvas.height -
+            sourceSize
+          ) / 2;
+
+
+        ctx.drawImage(
+
+          canvas,
+
+          sourceX,
+          sourceY,
+
+          sourceSize,
+          sourceSize,
+
+          0,
+          0,
+
+          size.width,
+          size.height
+
+        );
+
+      }
+
+
+      files.push({
+
+        name,
+
+        data:
+          canvasPNG(
+            outputCanvas
+          )
+
+      });
+
+    }
+
+  }
+
+
+  files.push({
+
+    name:"head.html",
+
+    data:
+      textBytes(
+        createHead()
+      )
+
+  });
+
+
+  files.push({
+
+    name:"README.txt",
+
+    data:
+      textBytes(
+        createReadme()
+      )
+
+  });
+
+
+  return files;
+
+}
+
+
+/* =========================================================
+   PREVIEW
+   ========================================================= */
+
+function updatePreview(){
+
+  const canvas =
+    drawIcon(256);
+
+  const preview =
+    canvas.toDataURL(
+      "image/png"
+    );
+
+
+  $("bigPreview").src =
+    preview;
+
+  $("tabIcon").src =
+    preview;
+
+  $("mini16").src =
+    preview;
+
+  $("mini32").src =
+    preview;
+
+  $("mini64").src =
+    preview;
+
+
+  const s =
+    settings();
+
+
+  $("tabTitle").textContent =
+    s.siteName;
+
+
+  $("radiusValue").textContent =
+    $("radius").value + "%";
+
+
+  $("paddingValue").textContent =
+    $("padding").value + "%";
+
+
+  $("previewStatus").textContent =
+    normalizeAssetPath()
+      ? "Configuration ready"
+      : "Specify asset location";
+
+
+  updatePathPreview();
+
+  renderAssets();
+
+  updateCode();
+
+}
+
+
+/* =========================================================
+   PATH PREVIEW
+   ========================================================= */
+
+function updatePathPreview(){
+
+  const base =
+    normalizeAssetPath();
+
+
+  if(!base){
+
+    $("pathPreview").textContent =
+      "Enter the file location above";
+
+    return;
+
+  }
+
+
+  $("pathPreview").textContent =
+    assetURL(
+      "favicon.ico"
+    );
+
+}
+
+
+/* =========================================================
+   ASSET PREVIEW
+   ========================================================= */
+
+function renderAssets(){
+
+  const assets =
+    getAssets();
+
+
+  $("assetCount").textContent =
+    `${assets.length + 2} files`;
+
+
+  $("assetGrid").innerHTML =
+    "";
+
+
+  for(
+    const [
+      name,
+      type,
+      description
+    ] of assets
+  ){
+
+    const item =
+      document.createElement(
+        "div"
+      );
+
+    item.className =
+      "asset";
+
+
+    const icon =
+      document.createElement(
+        "div"
+      );
+
+    icon.className =
+      "asset-icon";
+
+
+    const info =
+      document.createElement(
+        "div"
+      );
+
+    info.className =
+      "asset-info";
+
+
+    const strong =
+      document.createElement(
+        "strong"
+      );
+
+    strong.textContent =
+      name;
+
+
+    const span =
+      document.createElement(
+        "span"
+      );
+
+    span.textContent =
+      `${type} · ${description}`;
+
+
+    info.appendChild(
+      strong
+    );
+
+    info.appendChild(
+      span
+    );
+
+
+    const size =
+      filenameSize(name);
+
+
+    if(
+      size &&
+      !name.endsWith(".xml")
+    ){
+
+      const img =
+        document.createElement(
+          "img"
+        );
+
+
+      const options = {
+
+        wide:
+          isWideTile(name),
+
+        maskable:
+          name.includes(
+            "maskable"
+          ),
+
+        monochrome:
+          name.includes(
+            "monochrome"
+          )
+
+      };
+
+
+      img.src =
+        drawIcon(
+          Math.max(
+            size.width,
+            size.height
+          ),
+          options
+        ).toDataURL(
+          "image/png"
+        );
+
+
+      icon.appendChild(
+        img
+      );
+
+    }else{
+
+      icon.textContent =
+        name.endsWith(".svg")
+          ? "◇"
+          : name.endsWith(".ico")
+            ? "◈"
+            : name.endsWith(".xml")
+              ? "</>"
+              : "{}";
+
+    }
+
+
+    item.appendChild(
+      icon
+    );
+
+    item.appendChild(
+      info
+    );
+
+
+    $("assetGrid")
+      .appendChild(item);
+
+  }
+
+
+  const extras = [
+
+    [
+      "head.html",
+      "HTML",
+      "Integration code"
+    ],
+
+    [
+      "README.txt",
+      "TXT",
+      "Installation notes"
+    ]
+
+  ];
+
+
+  for(const extra of extras){
+
+    const item =
+      document.createElement(
+        "div"
+      );
+
+    item.className =
+      "asset";
+
+
+    item.innerHTML = `
+
+      <div class="asset-icon">
+        ${
+          extra[1] === "HTML"
+            ? "</>"
+            : "TXT"
+        }
+      </div>
+
+      <div class="asset-info">
+
+        <strong>
+          ${extra[0]}
+        </strong>
+
+        <span>
+          ${extra[1]} · ${extra[2]}
+        </span>
+
+      </div>
+
+    `;
+
+
+    $("assetGrid")
+      .appendChild(item);
+
+  }
+
+}
+
+
+/* =========================================================
+   CODE TABS
+   ========================================================= */
+
+function updateCode(){
+
+  let output = "";
+
+
+  if(activeCode === "head"){
+
+    output =
+      createHead();
+
+  }
+
+
+  if(activeCode === "manifest"){
+
+    output =
+      createManifest();
+
+  }
+
+
+  if(activeCode === "browserconfig"){
+
+    output =
+      createBrowserConfig();
+
+  }
+
+
+  if(activeCode === "safari"){
+
+    output =
+      createSVG({
+        safari:true
+      });
+
+  }
+
+
+  if(activeCode === "readme"){
+
+    output =
+      createReadme();
+
+  }
+
+
+  $("codeOutput").textContent =
+    output;
+
+}
+
+
+/* =========================================================
+   COPY
+   ========================================================= */
+
+async function copyCurrent(){
+
+  const text =
+    $("codeOutput").textContent;
+
+
+  try{
+
+    await navigator
+      .clipboard
+      .writeText(text);
+
+    showToast(
+      "Copied to clipboard"
+    );
+
+  }catch{
+
+    const textarea =
+      document.createElement(
+        "textarea"
+      );
+
+    textarea.value =
+      text;
+
+    document.body
+      .appendChild(
+        textarea
+      );
+
+    textarea.select();
+
+    document.execCommand(
+      "copy"
+    );
+
+    textarea.remove();
+
+    showToast(
+      "Copied to clipboard"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   DOWNLOAD
+   ========================================================= */
+
+async function downloadPackage(){
+
+  const button =
+    $("downloadButton");
+
+  const original =
+    button.textContent;
+
+
+  button.disabled =
+    true;
+
+  button.textContent =
+    "Preparing package…";
+
+
+  try{
+
+    const files =
+      await generateFiles();
+
+
+    const zip =
+      zipCreate(files);
+
+
+    const blob =
+      new Blob(
+        [zip],
+        {
+          type:
+            "application/zip"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(
+        blob
+      );
+
+
+    const link =
+      document.createElement(
+        "a"
+      );
+
+    link.href =
+      url;
+
+    link.download =
+      `${safeFileName(
+        settings().siteName
+      )}-favicon-kit.zip`;
+
+
+    document.body
+      .appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+
+    setTimeout(
+      () =>
+        URL.revokeObjectURL(url),
+      3000
+    );
+
+
+    showToast(
+      `${files.length} files generated`
+    );
+
+  }catch(error){
+
+    console.error(error);
+
+    showToast(
+      "The package could not be generated"
+    );
+
+  }finally{
+
+    button.disabled =
+      false;
+
+    button.textContent =
+      original;
+
+  }
+
+}
+
+
+/* =========================================================
+   SAFE FILENAME
+   ========================================================= */
+
+function safeFileName(name){
+
+  return name
+
+    .normalize("NFKD")
+
+    .replace(
+      /[^\w\s-]/g,
+      ""
+    )
+
+    .trim()
+
+    .replace(
+      /\s+/g,
+      "-"
+    )
+
+    .toLowerCase()
+
+    ||
+
+    "favicon";
+
+}
+
+
+/* =========================================================
+   TOAST
+   ========================================================= */
+
+function showToast(message){
+
+  $("toast").textContent =
+    message;
+
+
+  $("toast")
+    .classList
+    .add("show");
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      () => {
+
+        $("toast")
+          .classList
+          .remove("show");
+
+      },
+      2300
+    );
+
+}
+
+
+/* =========================================================
+   IMAGE UPLOAD
+   ========================================================= */
+
+function loadImageFile(file){
+
+  if(!file){
+    return;
+  }
+
+
+  const supported = [
+
+    "image/png",
+    "image/jpeg",
+    "image/webp",
+    "image/svg+xml"
+
+  ];
+
+
+  if(
+    !supported.includes(
+      file.type
+    )
+  ){
+
+    showToast(
+      "Unsupported image format"
+    );
+
+    return;
+
+  }
+
+
+  const reader =
+    new FileReader();
+
+
+  reader.onload = () => {
+
+    const image =
+      new Image();
+
+
+    image.onload = () => {
+
+      uploadedImage =
+        image;
+
+      uploadedFileName =
+        file.name;
+
+
+      $("uploadTitle")
+        .textContent =
+        "Source image selected";
+
+
+      $("uploadFile")
+        .textContent =
+        `${file.name} · ${
+          image.naturalWidth
+        }×${
+          image.naturalHeight
+        }`;
+
+
+      $("uploadFile")
+        .classList
+        .remove("hidden");
+
+
+      updatePreview();
+
+
+      showToast(
+        "Image loaded locally"
+      );
+
+    };
+
+
+    image.onerror = () => {
+
+      showToast(
+        "The image could not be read"
+      );
+
+    };
+
+
+    image.src =
+      reader.result;
+
+  };
+
+
+  reader.readAsDataURL(
+    file
+  );
+
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+function resetAll(){
+
+  $("iconText").value =
+    "F";
+
+  $("siteName").value =
+    "";
+
+  $("domain").value =
+    "";
+
+  $("assetPath").value =
+    "";
+
+  $("color1").value =
+    "#315f50";
+
+  $("color2").value =
+    "#42677d";
+
+  $("radius").value =
+    24;
+
+  $("padding").value =
+    16;
+
+  $("shadow").checked =
+    true;
+
+  $("transparent").checked =
+    false;
+
+  $("includeMono").checked =
+    true;
+
+
+  uploadedImage =
+    null;
+
+  uploadedFileName =
+    "";
+
+
+  $("uploadTitle")
+    .textContent =
+    "Choose or drop an image";
+
+
+  $("uploadFile")
+    .textContent =
+    "";
+
+  $("uploadFile")
+    .classList
+    .add("hidden");
+
+
+  currentMode =
+    "everything";
+
+
+  document
+    .querySelectorAll(
+      ".mode"
+    )
+    .forEach(button => {
+
+      button.classList.toggle(
+        "active",
+        button.dataset.mode ===
+          "everything"
+      );
+
+    });
+
+
+  updatePreview();
+
+
+  showToast(
+    "Configuration reset"
+  );
+
+}
+
+
+/* =========================================================
+   MODE EVENTS
+   ========================================================= */
+
+document
+  .querySelectorAll(".mode")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        currentMode =
+          button.dataset.mode;
+
+
+        document
+          .querySelectorAll(
+            ".mode"
+          )
+          .forEach(item => {
+
+            item.classList.toggle(
+              "active",
+              item === button
+            );
+
+          });
+
+
+        updatePreview();
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   INPUT EVENTS
+   ========================================================= */
+
+document
+  .querySelectorAll(
+    "#iconText,#siteName,#domain,#assetPath,#color1,#color2,#radius,#padding,#shadow,#transparent,#includeMono"
+  )
+  .forEach(element => {
+
+    element.addEventListener(
+      "input",
+      updatePreview
+    );
+
+    element.addEventListener(
+      "change",
+      updatePreview
+    );
+
+  });
+
+
+/* =========================================================
+   CODE TAB EVENTS
+   ========================================================= */
+
+document
+  .querySelectorAll(
+    ".code-tab"
+  )
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        activeCode =
+          button.dataset.code;
+
+
+        document
+          .querySelectorAll(
+            ".code-tab"
+          )
+          .forEach(item => {
+
+            item.classList.toggle(
+              "active",
+              item === button
+            );
+
+          });
+
+
+        updateCode();
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   BUTTON EVENTS
+   ========================================================= */
+
+$("copyButton")
+  .addEventListener(
+    "click",
+    copyCurrent
+  );
+
+
+$("downloadButton")
+  .addEventListener(
+    "click",
+    downloadPackage
+  );
+
+
+$("navDownload")
+  .addEventListener(
+    "click",
+    downloadPackage
+  );
+
+
+$("resetButton")
+  .addEventListener(
+    "click",
+    resetAll
+  );
+
+
+$("uploadButton")
+  .addEventListener(
+    "click",
+    () => {
+
+      $("fileInput").click();
+
+    }
+  );
+
+
+$("fileInput")
+  .addEventListener(
+    "change",
+    event => {
+
+      loadImageFile(
+        event.target.files[0]
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   DRAG & DROP
+   ========================================================= */
+
+const dropZone =
+  $("dropZone");
+
+
+[
+  "dragenter",
+  "dragover"
+]
+.forEach(eventName => {
+
+  dropZone.addEventListener(
+    eventName,
+    event => {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      dropZone.classList.add(
+        "drag"
+      );
+
+    }
+  );
+
+});
+
+
+[
+  "dragleave",
+  "drop"
+]
+.forEach(eventName => {
+
+  dropZone.addEventListener(
+    eventName,
+    event => {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      dropZone.classList.remove(
+        "drag"
+      );
+
+    }
+  );
+
+});
+
+
+dropZone.addEventListener(
+  "drop",
+  event => {
+
+    loadImageFile(
+      event.dataTransfer.files[0]
+    );
+
+  }
+);
+
+
+/* =========================================================
+   INITIALIZATION
+   ========================================================= */
+
+$("year").textContent =
+  new Date()
+    .getFullYear();
+
+
+updatePreview();
+
+</script>
+
+</body>
+</html>
