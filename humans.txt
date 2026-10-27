@@ -1,0 +1,35 @@
+
+/* TEAM */
+Creator: Nicholas Van-Orton
+Brand: NVO987
+Contact: nvo@nv987.us
+Website: https://nvo987.us/
+
+/* PROJECT */
+Name: Favicon Builder
+Website: https://favicon.nvo987.us/
+Purpose: Generate favicon and app icon packages from images.
+Primary language: English
+
+/* TECHNOLOGY */
+HTML5
+CSS3
+JavaScript
+HTML Canvas
+JSZip
+
+/* PRIVACY */
+The source image is designed to be processed locally in the browser.
+The application uses a third-party CDN to load JSZip.
+
+/* STANDARDS */
+HTML
+CSS
+JavaScript
+Web App Manifest
+Atom 1.0
+RSS 2.0
+
+/* COPYRIGHT */
+Copyright (c) 2026 Nicholas Van-Orton.
+All rights reserved.
