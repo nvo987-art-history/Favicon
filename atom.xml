@@ -1,0 +1,23 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Favicon Builder — NVO987</title>
+  <subtitle>Updates and announcements for Favicon Builder.</subtitle>
+  <id>https://favicon.nvo987.us/</id>
+  <link href="https://favicon.nvo987.us/" rel="alternate" type="text/html"/>
+  <link href="https://favicon.nvo987.us/atom.xml" rel="self" type="application/atom+xml"/>
+  <updated>2026-10-27T00:00:00Z</updated>
+  <author>
+    <name>Nicholas Van-Orton</name>
+    <email>nvo@nv987.us</email>
+    <uri>https://nvo987.us/</uri>
+  </author>
+  <rights>Copyright 2026 Nicholas Van-Orton. All rights reserved.</rights>
+  <entry>
+    <title>Favicon Builder</title>
+    <id>https://favicon.nvo987.us/</id>
+    <link href="https://favicon.nvo987.us/" rel="alternate" type="text/html"/>
+    <updated>2026-10-27T00:00:00Z</updated>
+    <summary>Generate website favicons, app icons, web app manifests, and related assets from an image using a browser-based tool.</summary>
+  </entry>
+</feed>
