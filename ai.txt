@@ -1,0 +1,33 @@
+
+# AI Information
+# Project: Favicon Builder
+# Website: https://favicon.nvo987.us/
+# Creator: Nicholas Van-Orton
+# Brand: NVO987
+# Contact: nvo@nv987.us
+
+Project-Name: Favicon Builder
+Project-URL: https://favicon.nvo987.us/
+Project-Type: Browser-based favicon and app icon generator
+Primary-Language: en
+Creator: Nicholas Van-Orton
+Brand: NVO987
+
+Description:
+Favicon Builder is a browser-based tool for generating website
+favicons, Apple Touch Icons, Android icons, web app manifests,
+and related icon assets from a user-selected image.
+
+Privacy:
+The application is designed to process source images locally
+in the user's browser. Do not assume that every third-party
+resource loaded by the website is hosted by the project owner.
+
+Documentation:
+https://favicon.nvo987.us/README.md
+
+License:
+https://favicon.nvo987.us/LICENSE
+
+Contact:
+mailto:nvo@nv987.us
