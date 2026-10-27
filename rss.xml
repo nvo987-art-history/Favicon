@@ -1,0 +1,24 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Favicon Builder | NVO987</title>
+    <link>https://favicon.nvo987.us/</link>
+    <description>Updates and announcements for Favicon Builder, a browser-based favicon and app icon generator.</description>
+    <language>en-us</language>
+    <copyright>Copyright 2026 Nicholas Van-Orton. All rights reserved.</copyright>
+    <managingEditor>nvo@nv987.us (Nicholas Van-Orton)</managingEditor>
+    <webMaster>nvo@nv987.us (Nicholas Van-Orton)</webMaster>
+    <atom:link href="https://favicon.nvo987.us/rss.xml"
+               rel="self"
+               type="application/rss+xml"/>
+
+    <item>
+      <title>Favicon Builder</title>
+      <link>https://favicon.nvo987.us/</link>
+      <guid isPermaLink="true">https://favicon.nvo987.us/</guid>
+      <description>Generate a complete collection of website favicons, app icons, web app manifests, and related assets from an image.</description>
+    </item>
+  </channel>
+</rss>
