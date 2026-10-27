@@ -1,0 +1,2081 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="theme-color" content="#0b1020">
+  <meta name="description" content="Create a complete website favicon package with PNG, ICO, SVG, Apple Touch icons, Android icons, web manifests and browser configuration files.">
+  <meta name="robots" content="index,follow">
+  <title>IconForge — Professional Favicon Generator</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b1020;
+      --surface: #11182b;
+      --surface-2: #171f35;
+      --surface-3: #202b44;
+      --border: rgba(174, 190, 230, .13);
+      --text: #f4f6ff;
+      --muted: #9ba8c4;
+      --accent: #a5f36b;
+      --accent-dark: #19351a;
+      --blue: #8798ff;
+      --danger: #ff8295;
+      --radius: 18px;
+      --shadow: 0 20px 70px rgba(0, 0, 0, .22);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 15% 0%, rgba(99, 102, 241, .12), transparent 38rem),
+        radial-gradient(ellipse at 95% 35%, rgba(165, 243, 107, .06), transparent 35rem),
+        var(--bg);
+      color: var(--text);
+      font: 15px/1.65 "DM Sans", sans-serif;
+      min-height: 100vh;
+    }
+
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+
+    a { color: inherit; }
+
+    .container {
+      width: min(1160px, calc(100% - 40px));
+      margin-inline: auto;
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(11, 16, 32, .78);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font: 700 21px "Space Grotesk", sans-serif;
+      letter-spacing: -.8px;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #10170c;
+      font-size: 22px;
+      box-shadow: 0 0 25px rgba(165, 243, 107, .12);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 11px;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: .7px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero {
+      padding: 74px 0 40px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.1px;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 820px;
+      margin: 17px auto;
+      font: 600 clamp(36px, 6vw, 66px)/1.08 "Space Grotesk", sans-serif;
+      letter-spacing: -3px;
+    }
+
+    .gradient-text {
+      color: var(--accent);
+    }
+
+    .hero > p {
+      max-width: 620px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .feature-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .feature-row span::before {
+      content: "✓";
+      color: var(--accent);
+      margin-right: 7px;
+    }
+
+    main { padding-bottom: 80px; }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, .95fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(17, 24, 43, .88);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      padding: 22px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font: 600 18px "Space Grotesk", sans-serif;
+    }
+
+    .step {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+    }
+
+    .panel-body { padding: 24px; }
+
+    .dropzone {
+      border: 1.5px dashed #485572;
+      border-radius: 15px;
+      padding: 33px 18px;
+      text-align: center;
+      background: rgba(135, 152, 255, .035);
+      transition: border-color .2s, background .2s;
+      outline: none;
+    }
+
+    .dropzone:hover,
+    .dropzone.dragover,
+    .dropzone:focus-visible {
+      border-color: var(--accent);
+      background: rgba(165, 243, 107, .055);
+    }
+
+    .upload-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 15px;
+      border-radius: 17px;
+      background: var(--surface-3);
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-size: 27px;
+    }
+
+    .dropzone h3 {
+      font: 600 17px "Space Grotesk", sans-serif;
+      margin-bottom: 6px;
+    }
+
+    .dropzone p {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .file-note {
+      display: block;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .btn {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 15px;
+      background: var(--surface-3);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 13px;
+      transition: transform .15s, opacity .15s, background .15s;
+    }
+
+    .btn:hover:not(:disabled) { transform: translateY(-1px); }
+
+    .btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #10170c;
+      border-color: transparent;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: #bcff8c;
+    }
+
+    .btn-block { width: 100%; }
+
+    .file-info {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      background: var(--surface-2);
+      border-radius: 10px;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .file-info.visible { display: flex; }
+
+    .file-info img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      border-radius: 9px;
+      background-color: #fff;
+      background-image:
+        linear-gradient(45deg, #ddd 25%, transparent 25%),
+        linear-gradient(-45deg, #ddd 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #ddd 75%),
+        linear-gradient(-45deg, transparent 75%, #ddd 75%);
+      background-size: 12px 12px;
+      background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+    }
+
+    .file-meta {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .file-meta strong {
+      display: block;
+      overflow-wrap: anywhere;
+      font-size: 12px;
+    }
+
+    .file-meta small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .text-button {
+      background: none;
+      border: 0;
+      color: var(--danger);
+      font-size: 12px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.1px;
+      margin: 25px 0 12px;
+    }
+
+    .field { margin-bottom: 17px; }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .field input[type="text"],
+    .field input[type="url"],
+    .field select {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--bg);
+      color: var(--text);
+      padding: 11px 12px;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--blue);
+    }
+
+    .field small {
+      display: block;
+      color: var(--muted);
+      margin-top: 6px;
+      font-size: 11px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .color-control {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 9px 11px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--bg);
+    }
+
+    .color-control input[type="color"] {
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .color-control span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .radio-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 9px 11px;
+      color: var(--muted);
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .radio-option:has(input:checked) {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      accent-color: var(--accent);
+    }
+
+    .preview-area {
+      padding: 22px;
+    }
+
+    .preview-stage {
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      position: relative;
+      overflow: hidden;
+      background-color: #f0f1f5;
+      background-image:
+        linear-gradient(45deg, #dedfe5 25%, transparent 25%),
+        linear-gradient(-45deg, #dedfe5 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #dedfe5 75%),
+        linear-gradient(-45deg, transparent 75%, #dedfe5 75%);
+      background-size: 22px 22px;
+      background-position: 0 0, 0 11px, 11px -11px, -11px 0;
+    }
+
+    .preview-stage img {
+      width: 144px;
+      height: 144px;
+      object-fit: contain;
+      image-rendering: auto;
+      display: none;
+    }
+
+    .preview-empty {
+      text-align: center;
+      color: #6d778d;
+      font-size: 12px;
+      padding: 24px;
+    }
+
+    .preview-empty strong {
+      display: block;
+      font: 600 15px "Space Grotesk", sans-serif;
+      margin-bottom: 5px;
+    }
+
+    .preview-stage.has-image img { display: block; }
+    .preview-stage.has-image .preview-empty { display: none; }
+
+    .preview-sizes {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .size-card {
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      padding: 12px 5px 10px;
+      text-align: center;
+      background: var(--surface);
+    }
+
+    .size-card .icon-stage {
+      height: 45px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 7px;
+    }
+
+    .size-card img {
+      max-width: 40px;
+      max-height: 40px;
+      image-rendering: auto;
+    }
+
+    .size-card strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .size-card small {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .browser-preview {
+      margin-top: 22px;
+      padding: 15px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .browser-top {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .browser-top i {
+      width: 7px;
+      height: 7px;
+      background: #52607a;
+      border-radius: 50%;
+    }
+
+    .browser-tab {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 8px 8px 0 0;
+      padding: 10px;
+      background: var(--surface-3);
+      font-size: 11px;
+      color: var(--muted);
+      overflow: hidden;
+    }
+
+    .browser-tab img {
+      width: 16px;
+      height: 16px;
+      object-fit: contain;
+      display: none;
+    }
+
+    .browser-tab.has-image img { display: block; }
+
+    .browser-address {
+      margin-top: 1px;
+      padding: 9px 10px;
+      border-radius: 0 0 8px 8px;
+      background: var(--bg);
+      color: var(--muted);
+      font-size: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .output-section {
+      margin-top: 25px;
+    }
+
+    .output-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 15px;
+    }
+
+    .output-heading h2 {
+      margin: 0;
+      font: 600 24px "Space Grotesk", sans-serif;
+      letter-spacing: -.6px;
+    }
+
+    .output-heading p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .output-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 9px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .stat strong {
+      color: var(--text);
+      margin-right: 4px;
+    }
+
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .asset {
+      min-width: 0;
+      padding: 15px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .asset-icon {
+      flex-shrink: 0;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--surface-3);
+      font-size: 17px;
+    }
+
+    .asset-text { min-width: 0; }
+
+    .asset-text strong {
+      display: block;
+      font-size: 11px;
+      overflow-wrap: anywhere;
+    }
+
+    .asset-text small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      margin-top: 3px;
+    }
+
+    .integration {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .code-panel {
+      min-width: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #0d1323;
+      overflow: hidden;
+    }
+
+    .code-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-heading h3 {
+      font: 600 14px "Space Grotesk", sans-serif;
+      margin: 0;
+    }
+
+    pre {
+      margin: 0;
+      padding: 20px;
+      max-height: 340px;
+      overflow: auto;
+      color: #c4d3f4;
+      font: 11px/1.8 ui-monospace, SFMono-Regular, Consolas, monospace;
+      white-space: pre;
+      tab-size: 2;
+    }
+
+    .code-actions {
+      padding: 0 18px 17px;
+    }
+
+    .status {
+      display: none;
+      margin-top: 15px;
+      padding: 12px 14px;
+      border: 1px solid rgba(165, 243, 107, .24);
+      background: rgba(165, 243, 107, .06);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--accent);
+      overflow-wrap: anywhere;
+    }
+
+    .status.visible { display: block; }
+    .status.error {
+      color: var(--danger);
+      border-color: rgba(255, 130, 149, .3);
+      background: rgba(255, 130, 149, .06);
+    }
+
+    .generate-bar {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .generate-bar .btn-primary {
+      flex: 1;
+      min-height: 49px;
+      font-size: 14px;
+    }
+
+    .generate-note {
+      color: var(--muted);
+      font-size: 10px;
+      max-width: 155px;
+    }
+
+    .info-section {
+      margin-top: 70px;
+    }
+
+    .info-section > h2 {
+      font: 600 30px "Space Grotesk", sans-serif;
+      letter-spacing: -1px;
+      margin-bottom: 10px;
+    }
+
+    .info-section > p {
+      color: var(--muted);
+      max-width: 680px;
+      font-size: 13px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .info-card {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .info-card .number {
+      color: var(--accent);
+      font: 600 12px "Space Grotesk", sans-serif;
+    }
+
+    .info-card h3 {
+      margin: 12px 0 8px;
+      font: 600 15px "Space Grotesk", sans-serif;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      color: var(--text);
+      font: 600 14px "Space Grotesk", sans-serif;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .footer-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    @media (max-width: 850px) {
+      .workspace { grid-template-columns: 1fr; }
+      .asset-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .integration { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 54px; }
+    }
+
+    @media (max-width: 520px) {
+      .container { width: min(100% - 24px, 1160px); }
+      .nav { min-height: 65px; }
+      .brand { font-size: 17px; }
+      .brand-mark { width: 33px; height: 33px; }
+      .nav-links { gap: 10px; }
+      .nav-links a { display: none; }
+      .hero { padding: 44px 0 30px; }
+      h1 { letter-spacing: -1.8px; }
+      .hero > p { font-size: 14px; }
+      .panel-header { padding: 17px; }
+      .panel-body, .preview-area { padding: 17px; }
+      .two-col { grid-template-columns: 1fr; gap: 0; }
+      .preview-sizes { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .asset-grid { grid-template-columns: 1fr; }
+      .output-heading { align-items: start; flex-direction: column; }
+      .generate-bar { align-items: stretch; flex-direction: column; }
+      .generate-note { max-width: none; }
+      .info-section { margin-top: 48px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+<header>
+  <div class="container nav">
+    <a href="#" class="brand" aria-label="IconForge home">
+      <span class="brand-mark" aria-hidden="true">✳</span>
+      <span>IconForge<span class="gradient-text">.</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="#generator">Generator</a>
+      <a href="#formats">Formats</a>
+      <a href="#integration">Integration</a>
+      <span class="pill">Free · Browser-based</span>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <div class="eyebrow">The complete favicon toolkit</div>
+    <h1>One icon.<br><span class="gradient-text">Every platform.</span></h1>
+    <p>Generate a complete, production-ready favicon package for your website. All essential formats, properly sized and organized in one download.</p>
+    <div class="feature-row">
+      <span>No account required</span>
+      <span>Local image processing</span>
+      <span>One-click ZIP export</span>
+    </div>
+  </div>
+</section>
+
+<main class="container" id="generator">
+  <div class="workspace">
+
+    <section class="panel" aria-labelledby="setup-title">
+      <div class="panel-header">
+        <h2 id="setup-title">Create your icon package</h2>
+        <span class="step">STEP 01 / 02</span>
+      </div>
+
+      <div class="panel-body">
+        <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload an image by selecting a file or dropping it here">
+          <div class="upload-icon" aria-hidden="true">↥</div>
+          <h3>Drop your image here</h3>
+          <p>Start with your logo, brand mark or app icon.</p>
+          <button class="btn" type="button" id="browseButton">Browse files</button>
+          <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml,image/avif,image/gif" hidden>
+          <span class="file-note">PNG, JPG, WEBP, SVG, AVIF or GIF · Max 20 MB</span>
+        </div>
+
+        <div class="file-info" id="fileInfo">
+          <img id="sourcePreview" alt="Uploaded source preview">
+          <div class="file-meta">
+            <strong id="fileName">No file selected</strong>
+            <small id="fileDimensions">—</small>
+          </div>
+          <button class="text-button" type="button" id="removeButton">Remove</button>
+        </div>
+
+        <div class="section-label">Brand settings</div>
+
+        <div class="field">
+          <label for="appName">Website or application name</label>
+          <input id="appName" type="text" value="My Website" maxlength="80" placeholder="My Website">
+        </div>
+
+        <div class="field">
+          <label for="appShortName">Short name</label>
+          <input id="appShortName" type="text" value="MySite" maxlength="30" placeholder="MySite">
+          <small>Used in the web manifest and installable app metadata.</small>
+        </div>
+
+        <div class="field">
+          <label for="siteUrl">Website URL</label>
+          <input id="siteUrl" type="url" placeholder="https://example.com">
+          <small>Optional. Used to generate a ready-to-copy HTML snippet.</small>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="backgroundColor">Background color</label>
+            <div class="color-control">
+              <input type="color" id="backgroundColor" value="#ffffff">
+              <span id="backgroundValue">#FFFFFF</span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="padding">Icon padding</label>
+            <select id="padding">
+              <option value="0">None — full bleed</option>
+              <option value="5">Minimal — 5%</option>
+              <option value="10" selected>Standard — 10%</option>
+              <option value="15">Comfortable — 15%</option>
+              <option value="20">Extra — 20%</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Image fitting</label>
+          <div class="radio-row">
+            <label class="radio-option">
+              <input type="radio" name="fit" value="contain" checked>
+              Contain
+            </label>
+            <label class="radio-option">
+              <input type="radio" name="fit" value="cover">
+              Crop to fill
+            </label>
+          </div>
+          <small>Contain preserves the whole image. Crop to fill uses the full square canvas.</small>
+        </div>
+
+        <div class="field">
+          <label class="radio-option" style="display:flex">
+            <input type="checkbox" id="transparent" checked>
+            Preserve transparency where supported
+          </label>
+        </div>
+
+        <div class="generate-bar">
+          <button class="btn btn-primary" type="button" id="generateButton" disabled>
+            Generate favicon package ↗
+          </button>
+          <div class="generate-note">Your image is processed in your browser. No upload to a generation server.</div>
+        </div>
+
+        <div class="status" id="status" role="status" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="preview-title">
+      <div class="panel-header">
+        <h2 id="preview-title">Live preview</h2>
+        <span class="step" id="previewState">AWAITING IMAGE</span>
+      </div>
+
+      <div class="preview-area">
+        <div class="preview-stage" id="previewStage">
+          <img id="mainPreview" alt="Generated icon preview">
+          <div class="preview-empty">
+            <strong>Your icon will appear here</strong>
+            Upload a source image to see the preview.
+          </div>
+        </div>
+
+        <div class="preview-sizes" id="previewSizes">
+          <div class="size-card"><div class="icon-stage">◻</div><strong>16 × 16</strong><small>Browser tab</small></div>
+          <div class="size-card"><div class="icon-stage">◻</div><strong>32 × 32</strong><small>Standard</small></div>
+          <div class="size-card"><div class="icon-stage">◻</div><strong>180 × 180</strong><small>Apple Touch</small></div>
+          <div class="size-card"><div class="icon-stage">◻</div><strong>512 × 512</strong><small>App icon</small></div>
+        </div>
+
+        <div class="browser-preview">
+          <div class="browser-top" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="browser-tab" id="browserTab">
+            <img id="tabPreview" alt="">
+            <span id="tabTitle">My Website</span>
+          </div>
+          <div class="browser-address" id="browserAddress">https://example.com</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="output-section" id="formats" aria-labelledby="output-title">
+    <div class="output-heading">
+      <div>
+        <div class="eyebrow">Everything you need</div>
+        <h2 id="output-title">Your output package</h2>
+        <p>Only relevant, standards-based files. No dozens of redundant icon variants.</p>
+      </div>
+      <span class="pill" id="outputStatus">NOT GENERATED</span>
+    </div>
+
+    <div class="output-stats">
+      <span class="stat"><strong id="fileCount">0</strong> files</span>
+      <span class="stat"><strong>PNG</strong> raster icons</span>
+      <span class="stat"><strong>ICO</strong> multi-size favicon</span>
+      <span class="stat"><strong>SVG</strong> vector container</span>
+      <span class="stat"><strong>JSON</strong> web manifests</span>
+    </div>
+
+    <div class="asset-grid" id="assetGrid">
+      <div class="asset">
+        <div class="asset-icon">▧</div>
+        <div class="asset-text"><strong>favicon.ico</strong><small>Multi-resolution ICO file</small></div>
+      </div>
+      <div class="asset">
+        <div class="asset-icon">◈</div>
+        <div class="asset-text"><strong>favicon.svg</strong><small>SVG favicon container</small></div>
+      </div>
+      <div class="asset">
+        <div class="asset-icon">{ }</div>
+        <div class="asset-text"><strong>manifest.json</strong><small>Web app manifest</small></div>
+      </div>
+    </div>
+
+    <div class="generate-bar">
+      <button class="btn btn-primary" type="button" id="downloadButton" disabled>
+        ↓ Download complete package (.zip)
+      </button>
+      <button class="btn" type="button" id="downloadIcoButton" disabled>Download ICO</button>
+    </div>
+
+    <div class="status" id="downloadStatus" role="status" aria-live="polite"></div>
+  </section>
+
+  <section class="integration" id="integration">
+    <div class="code-panel">
+      <div class="code-heading">
+        <h3>HTML head integration</h3>
+        <span class="step">HTML</span>
+      </div>
+      <pre id="headCode"><code>&lt;!-- Generated after you create your icons --&gt;
+&lt;link rel="icon" href="/favicon.ico"&gt;
+&lt;link rel="icon" type="image/svg+xml" href="/favicon.svg"&gt;
+&lt;link rel="apple-touch-icon" href="/apple-touch-icon.png"&gt;
+&lt;link rel="manifest" href="/manifest.json"&gt;</code></pre>
+      <div class="code-actions">
+        <button class="btn" type="button" data-copy="headCode">Copy HTML snippet</button>
+      </div>
+    </div>
+
+    <div class="code-panel">
+      <div class="code-heading">
+        <h3>Generated file structure</h3>
+        <span class="step">PACKAGE</span>
+      </div>
+      <pre id="treeCode"><code>favicon-package/
+├── favicon.ico
+├── favicon.svg
+├── apple-touch-icon.png
+├── manifest.json
+└── site.webmanifest</code></pre>
+      <div class="code-actions">
+        <button class="btn" type="button" data-copy="treeCode">Copy file structure</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <div class="eyebrow">Built for the modern web</div>
+    <h2>A complete favicon workflow.</h2>
+    <p>Use one source image to prepare the most useful browser, mobile, and progressive web app icon assets. Review the generated files before adding them to your project.</p>
+
+    <div class="info-grid">
+      <article class="info-card">
+        <div class="number">01 / ASSETS</div>
+        <h3>Optimized icon sizes</h3>
+        <p>Generate browser icons, Apple Touch icons, Android launch icons and Windows tile artwork at the required dimensions.</p>
+      </article>
+      <article class="info-card">
+        <div class="number">02 / METADATA</div>
+        <h3>Manifest and configuration</h3>
+        <p>Get manifest.json, site.webmanifest, browserconfig.xml and ready-to-use HTML references.</p>
+      </article>
+      <article class="info-card">
+        <div class="number">03 / EXPORT</div>
+        <h3>One organized ZIP</h3>
+        <p>Download the generated package and copy its contents into your website's public root directory.</p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-brand">IconForge.</div>
+      <div>Professional favicon generation for the modern web.</div>
+    </div>
+    <div class="footer-links">
+      <a href="#generator">Generator</a>
+      <a href="#formats">Output formats</a>
+      <a href="#integration">Integration guide</a>
+    </div>
+    <div>© <span id="year"></span> IconForge. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- JSZip creates the downloadable ZIP archive. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const state = {
+    file: null,
+    sourceImage: null,
+    sourceURL: null,
+    sourceDataURL: null,
+    assets: new Map(),
+    icoBlob: null,
+    generated: false
+  };
+
+  const pngSizes = [
+    16, 32, 48, 64, 96, 128, 150, 180, 192, 256, 310, 512
+  ];
+
+  const assetDescriptions = {
+    "favicon.ico": ["ICO", "Multi-size browser favicon"],
+    "favicon.svg": ["SVG", "SVG container with embedded image"],
+    "favicon-16x16.png": ["PNG", "Small browser tab icon"],
+    "favicon-32x32.png": ["PNG", "Standard browser favicon"],
+    "favicon-48x48.png": ["PNG", "Legacy browser icon"],
+    "favicon-64x64.png": ["PNG", "High-density browser icon"],
+    "favicon-96x96.png": ["PNG", "High-resolution icon"],
+    "favicon-128x128.png": ["PNG", "128px icon"],
+    "mstile-150x150.png": ["PNG", "Windows tile"],
+    "apple-touch-icon.png": ["PNG", "Apple Touch icon · 180px"],
+    "android-chrome-192x192.png": ["PNG", "Android app icon"],
+    "favicon-256x256.png": ["PNG", "Large icon"],
+    "mstile-310x310.png": ["PNG", "Large Windows tile"],
+    "mstile-310x150.png": ["PNG", "Wide Windows tile"],
+    "android-chrome-512x512.png": ["PNG", "Large Android app icon"],
+    "manifest.json": ["JSON", "Web app manifest"],
+    "site.webmanifest": ["JSON", "Web app manifest alternative"],
+    "browserconfig.xml": ["XML", "Microsoft browser configuration"],
+    "safari-pinned-tab.svg": ["SVG", "Safari pinned-tab artwork"]
+  };
+
+  const requiredFiles = [
+    "favicon.ico",
+    "favicon.svg",
+    "favicon-16x16.png",
+    "favicon-32x32.png",
+    "favicon-48x48.png",
+    "favicon-64x64.png",
+    "favicon-96x96.png",
+    "favicon-128x128.png",
+    "favicon-256x256.png",
+    "apple-touch-icon.png",
+    "android-chrome-192x192.png",
+    "android-chrome-512x512.png",
+    "mstile-150x150.png",
+    "mstile-310x310.png",
+    "mstile-310x150.png",
+    "manifest.json",
+    "site.webmanifest",
+    "browserconfig.xml",
+    "safari-pinned-tab.svg"
+  ];
+
+  function setStatus(message, isError = false, target = "status") {
+    const el = $(target);
+    el.textContent = message;
+    el.classList.add("visible");
+    el.classList.toggle("error", isError);
+  }
+
+  function clearStatus(target = "status") {
+    const el = $(target);
+    el.textContent = "";
+    el.classList.remove("visible", "error");
+  }
+
+  function safeFilename(name) {
+    return name.replace(/[<>:"/\\|?*\u0000-\u001f]/g, "_");
+  }
+
+  function getFit() {
+    return document.querySelector('input[name="fit"]:checked').value;
+  }
+
+  function getSettings() {
+    return {
+      name: $("appName").value.trim() || "My Website",
+      shortName: $("appShortName").value.trim() || "MySite",
+      siteUrl: $("siteUrl").value.trim(),
+      background: $("backgroundColor").value,
+      padding: Number($("padding").value),
+      fit: getFit(),
+      transparent: $("transparent").checked
+    };
+  }
+
+  function updateSettingsUI() {
+    $("backgroundValue").textContent =
+      $("backgroundColor").value.toUpperCase();
+
+    $("tabTitle").textContent =
+      $("appName").value.trim() || "My Website";
+
+    const url = $("siteUrl").value.trim();
+    $("browserAddress").textContent = url || "https://example.com";
+
+    if (state.sourceImage) {
+      renderMainPreview();
+    }
+
+    if (state.generated) {
+      updateIntegration();
+    }
+  }
+
+  function clearGenerated() {
+    state.assets.clear();
+    state.icoBlob = null;
+    state.generated = false;
+
+    $("downloadButton").disabled = true;
+    $("downloadIcoButton").disabled = true;
+    $("outputStatus").textContent = "NOT GENERATED";
+    $("fileCount").textContent = "0";
+
+    renderAssetGrid();
+    updateIntegration();
+    clearStatus("downloadStatus");
+  }
+
+  function invalidateGenerated() {
+    if (state.generated) {
+      clearGenerated();
+      setStatus(
+        "Settings changed. Generate the package again to apply your changes."
+      );
+    }
+  }
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(img);
+      };
+
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error("This image could not be decoded by your browser."));
+      };
+
+      img.src = url;
+    });
+  }
+
+  async function selectFile(file) {
+    clearStatus();
+
+    if (!file) return;
+
+    const allowed = [
+      "image/png",
+      "image/jpeg",
+      "image/webp",
+      "image/svg+xml",
+      "image/avif",
+      "image/gif"
+    ];
+
+    if (!allowed.includes(file.type)) {
+      setStatus("Unsupported file type. Please choose PNG, JPEG, WEBP, SVG, AVIF or GIF.", true);
+      return;
+    }
+
+    if (file.size > 20 * 1024 * 1024) {
+      setStatus("The selected file is larger than 20 MB. Please choose a smaller image.", true);
+      return;
+    }
+
+    try {
+      const img = await loadImage(file);
+
+      if (!img.naturalWidth || !img.naturalHeight) {
+        throw new Error("The selected image has invalid dimensions.");
+      }
+
+      if (img.naturalWidth > 12000 || img.naturalHeight > 12000) {
+        throw new Error("The image dimensions are too large. Maximum dimension: 12000 pixels.");
+      }
+
+      state.file = file;
+      state.sourceImage = img;
+      state.sourceURL = URL.createObjectURL(file);
+
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        state.sourceDataURL = reader.result;
+        $("sourcePreview").src = reader.result;
+        $("tabPreview").src = reader.result;
+        $("browserTab").classList.add("has-image");
+      };
+
+      reader.onerror = () => {
+        setStatus("The image preview could not be loaded.", true);
+      };
+
+      reader.readAsDataURL(file);
+
+      $("fileName").textContent = safeFilename(file.name);
+      $("fileDimensions").textContent =
+        `${img.naturalWidth} × ${img.naturalHeight} px · ${(file.size / 1024).toFixed(1)} KB`;
+
+      $("fileInfo").classList.add("visible");
+      $("generateButton").disabled = false;
+      $("previewState").textContent = "IMAGE LOADED";
+      $("previewStage").classList.add("has-image");
+
+      renderMainPreview();
+      clearGenerated();
+
+      setStatus("Image ready. Review the settings and generate your package.");
+    } catch (error) {
+      setStatus(error.message || "Unable to load the selected image.", true);
+    }
+  }
+
+  function drawIcon(size, settings, image = state.sourceImage) {
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+
+    const ctx = canvas.getContext("2d", { alpha: true });
+
+    if (!ctx) {
+      throw new Error("Your browser does not support canvas rendering.");
+    }
+
+    ctx.clearRect(0, 0, size, size);
+
+    if (!settings.transparent) {
+      ctx.fillStyle = settings.background;
+      ctx.fillRect(0, 0, size, size);
+    }
+
+    const padding = size * settings.padding / 100;
+    const available = size - padding * 2;
+
+    const sw = image.naturalWidth;
+    const sh = image.naturalHeight;
+
+    let dw, dh, dx, dy;
+
+    if (settings.fit === "cover") {
+      const scale = Math.max(available / sw, available / sh);
+      dw = sw * scale;
+      dh = sh * scale;
+      dx = (size - dw) / 2;
+      dy = (size - dh) / 2;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(0, 0, size, size);
+      ctx.clip();
+      ctx.drawImage(image, dx, dy, dw, dh);
+      ctx.restore();
+    } else {
+      const scale = Math.min(available / sw, available / sh);
+      dw = sw * scale;
+      dh = sh * scale;
+      dx = (size - dw) / 2;
+      dy = (size - dh) / 2;
+
+      ctx.drawImage(image, dx, dy, dw, dh);
+    }
+
+    return canvas;
+  }
+
+  function canvasBlob(canvas, type = "image/png", quality) {
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(blob => {
+        if (blob) resolve(blob);
+        else reject(new Error("The browser could not encode the image."));
+      }, type, quality);
+    });
+  }
+
+  async function makePNG(size, settings) {
+    const canvas = drawIcon(size, settings);
+    return canvasBlob(canvas, "image/png");
+  }
+
+  function makeSVG(dataURL) {
+    const svg = [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">',
+      '<image width="512" height="512" href="' + dataURL + '" preserveAspectRatio="xMidYMid meet"/>',
+      '</svg>'
+    ].join("");
+
+    return new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+  }
+
+  function makeSafariSVG() {
+    // A genuine monochrome vector mask cannot be reliably inferred from
+    // arbitrary raster artwork. This file embeds the generated artwork
+    // and should be replaced with a true single-color path for best results.
+    const svg = [
+      '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">',
+      '<image href="favicon.svg" width="100" height="100" />',
+      '</svg>'
+    ].join("");
+
+    return new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+  }
+
+  async function makeICO(entries) {
+    const prepared = [];
+
+    for (const size of [16, 32, 48, 256]) {
+      const blob = entries.get(`favicon-${size}x${size}.png`);
+
+      if (!blob) {
+        throw new Error(`Missing source image for ${size}px ICO entry.`);
+      }
+
+      prepared.push({
+        size,
+        bytes: new Uint8Array(await blob.arrayBuffer())
+      });
+    }
+
+    const headerSize = 6;
+    const entrySize = 16;
+    const dataOffset = headerSize + prepared.length * entrySize;
+
+    let total = dataOffset;
+
+    for (const item of prepared) {
+      total += item.bytes.byteLength;
+    }
+
+    const buffer = new ArrayBuffer(total);
+    const view = new DataView(buffer);
+
+    view.setUint16(0, 0, true);
+    view.setUint16(2, 1, true);
+    view.setUint16(4, prepared.length, true);
+
+    let offset = dataOffset;
+
+    prepared.forEach((item, index) => {
+      const pos = headerSize + index * entrySize;
+
+      view.setUint8(pos, item.size === 256 ? 0 : item.size);
+      view.setUint8(pos + 1, item.size === 256 ? 0 : item.size);
+      view.setUint8(pos + 2, 0);
+      view.setUint8(pos + 3, 0);
+      view.setUint16(pos + 4, 1, true);
+      view.setUint16(pos + 6, 32, true);
+      view.setUint32(pos + 8, item.bytes.byteLength, true);
+      view.setUint32(pos + 12, offset, true);
+
+      new Uint8Array(buffer, offset, item.bytes.byteLength)
+        .set(item.bytes);
+
+      offset += item.bytes.byteLength;
+    });
+
+    return new Blob([buffer], { type: "image/x-icon" });
+  }
+
+  function buildManifest(settings) {
+    const icons = [
+      {
+        src: "/android-chrome-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any"
+      },
+      {
+        src: "/android-chrome-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any"
+      }
+    ];
+
+    return {
+      id: "/",
+      name: settings.name,
+      short_name: settings.shortName,
+      description: `${settings.name} web application`,
+      start_url: "/",
+      scope: "/",
+      display: "standalone",
+      background_color: settings.background,
+      theme_color: settings.background,
+      icons
+    };
+  }
+
+  function buildBrowserConfig(settings) {
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square150x150logo src="/mstile-150x150.png"/>
+      <TileColor>${settings.background}</TileColor>
+    </tile>
+  </msapplication>
+</browserconfig>
+`;
+  }
+
+  function buildHead(settings) {
+    const name = settings.name.replace(/[<>&"]/g, "");
+    const url = settings.siteUrl.replace(/["<>]/g, "");
+    const base = url ? url.replace(/\/+$/, "") + "/" : "/";
+
+    return `<!-- ${name} favicon integration -->
+<link rel="icon" href="${base}favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="${base}favicon.svg">
+<link rel="icon" type="image/png" sizes="16x16" href="${base}favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="${base}favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="${base}apple-touch-icon.png">
+<link rel="manifest" href="${base}manifest.json">
+<meta name="theme-color" content="${settings.background}">
+<meta name="application-name" content="${name}">
+<meta name="msapplication-TileColor" content="${settings.background}">
+<meta name="msapplication-config" content="${base}browserconfig.xml">`;
+  }
+
+  function buildFileTree() {
+    return `favicon-package/
+├── favicon.ico
+├── favicon.svg
+├── favicon-16x16.png
+├── favicon-32x32.png
+├── favicon-48x48.png
+├── favicon-64x64.png
+├── favicon-96x96.png
+├── favicon-128x128.png
+├── favicon-256x256.png
+├── apple-touch-icon.png
+├── android-chrome-192x192.png
+├── android-chrome-512x512.png
+├── mstile-150x150.png
+├── mstile-310x310.png
+├── mstile-310x150.png
+├── manifest.json
+├── site.webmanifest
+├── browserconfig.xml
+└── safari-pinned-tab.svg`;
+  }
+
+  function updateIntegration() {
+    const settings = getSettings();
+    $("headCode").textContent = buildHead(settings);
+    $("treeCode").textContent = buildFileTree();
+  }
+
+  function renderMainPreview() {
+    if (!state.sourceImage) return;
+
+    try {
+      const canvas = drawIcon(512, getSettings());
+      $("mainPreview").src = canvas.toDataURL("image/png");
+      $("previewStage").classList.add("has-image");
+      $("previewState").textContent = state.generated ? "PACKAGE READY" : "LIVE PREVIEW";
+
+      const sizeItems = [
+        { size: 16, label: "Browser tab" },
+        { size: 32, label: "Standard" },
+        { size: 180, label: "Apple Touch" },
+        { size: 512, label: "App icon" }
+      ];
+
+      $("previewSizes").innerHTML = "";
+
+      sizeItems.forEach(item => {
+        const c = drawIcon(item.size, getSettings());
+        const card = document.createElement("div");
+        card.className = "size-card";
+
+        const stage = document.createElement("div");
+        stage.className = "icon-stage";
+
+        const img = document.createElement("img");
+        img.alt = `${item.size} by ${item.size} icon preview`;
+        img.width = Math.min(item.size, 40);
+        img.height = Math.min(item.size, 40);
+        img.src = c.toDataURL("image/png");
+
+        const strong = document.createElement("strong");
+        strong.textContent = `${item.size} × ${item.size}`;
+
+        const small = document.createElement("small");
+        small.textContent = item.label;
+
+        stage.appendChild(img);
+        card.append(stage, strong, small);
+        $("previewSizes").appendChild(card);
+      });
+
+      $("tabPreview").src = canvas.toDataURL("image/png");
+      $("browserTab").classList.add("has-image");
+    } catch (error) {
+      setStatus(error.message || "Preview could not be rendered.", true);
+    }
+  }
+
+  function renderAssetGrid() {
+    const grid = $("assetGrid");
+    grid.innerHTML = "";
+
+    const entries = state.generated
+      ? Array.from(state.assets.keys())
+      : Object.keys(assetDescriptions);
+
+    entries.forEach(filename => {
+      const desc = assetDescriptions[filename] || ["FILE", "Generated asset"];
+      const card = document.createElement("div");
+      card.className = "asset";
+
+      const icon = document.createElement("div");
+      icon.className = "asset-icon";
+      icon.textContent = desc[0] === "JSON" ? "{ }" :
+        desc[0] === "SVG" ? "◈" :
+        desc[0] === "PNG" ? "▧" : desc[0];
+
+      const text = document.createElement("div");
+      text.className = "asset-text";
+
+      const name = document.createElement("strong");
+      name.textContent = filename;
+
+      const detail = document.createElement("small");
+      detail.textContent = desc[1];
+
+      text.append(name, detail);
+      card.append(icon, text);
+      grid.appendChild(card);
+    });
+
+    $("fileCount").textContent = state.generated ? state.assets.size : "0";
+  }
+
+  async function generatePackage() {
+    if (!state.sourceImage) {
+      setStatus("Please choose an image first.", true);
+      return;
+    }
+
+    if (typeof JSZip === "undefined") {
+      setStatus("The ZIP library could not be loaded. Check your internet connection and reload this page.", true);
+      return;
+    }
+
+    const button = $("generateButton");
+    button.disabled = true;
+    button.textContent = "Generating…";
+
+    clearStatus();
+    clearStatus("downloadStatus");
+
+    try {
+      const settings = getSettings();
+      const assets = new Map();
+
+      setStatus("Rendering icon sizes…");
+
+      for (const size of pngSizes) {
+        const blob = await makePNG(size, settings);
+        assets.set(`favicon-${size}x${size}.png`, blob);
+      }
+
+      assets.set(
+        "apple-touch-icon.png",
+        await makePNG(180, settings)
+      );
+
+      assets.set(
+        "android-chrome-192x192.png",
+        await makePNG(192, settings)
+      );
+
+      assets.set(
+        "android-chrome-512x512.png",
+        await makePNG(512, settings)
+      );
+
+      assets.set(
+        "mstile-150x150.png",
+        await makePNG(150, settings)
+      );
+
+      // Windows tile artwork uses rectangular canvases.
+      for (const [name, width, height] of [
+        ["mstile-310x310.png", 310, 310],
+        ["mstile-310x150.png", 310, 150]
+      ]) {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d", { alpha: true });
+
+        if (!ctx) throw new Error("Canvas rendering is unavailable.");
+
+        if (!settings.transparent) {
+          ctx.fillStyle = settings.background;
+          ctx.fillRect(0, 0, width, height);
+        }
+
+        const padding = Math.min(width, height) * settings.padding / 100;
+        const scale = settings.fit === "cover"
+          ? Math.max((width - padding * 2) / state.sourceImage.naturalWidth,
+                     (height - padding * 2) / state.sourceImage.naturalHeight)
+          : Math.min((width - padding * 2) / state.sourceImage.naturalWidth,
+                     (height - padding * 2) / state.sourceImage.naturalHeight);
+
+        const dw = state.sourceImage.naturalWidth * scale;
+        const dh = state.sourceImage.naturalHeight * scale;
+
+        ctx.drawImage(
+          state.sourceImage,
+          (width - dw) / 2,
+          (height - dh) / 2,
+          dw,
+          dh
+        );
+
+        assets.set(name, await canvasBlob(canvas));
+      }
+
+      setStatus("Building ICO, SVG and configuration files…");
+
+      assets.set("favicon.ico", await makeICO(assets));
+
+      const svg = makeSVG(state.sourceDataURL);
+      assets.set("favicon.svg", svg);
+
+      // Safari's pinned-tab icon is a special monochrome-mask use case.
+      // Include a separate SVG file, but document that artwork may need
+      // a true single-color vector path for full Safari mask compatibility.
+      const safariSVG = new Blob([
+        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <image href="${state.sourceDataURL}" width="100" height="100" preserveAspectRatio="xMidYMid meet"/>
+</svg>`
+      ], { type: "image/svg+xml;charset=utf-8" });
+
+      assets.set("safari-pinned-tab.svg", safariSVG);
+
+      const manifest = buildManifest(settings);
+      const manifestJSON = JSON.stringify(manifest, null, 2) + "\n";
+
+      assets.set(
+        "manifest.json",
+        new Blob([manifestJSON], { type: "application/manifest+json;charset=utf-8" })
+      );
+
+      assets.set(
+        "site.webmanifest",
+        new Blob([manifestJSON], { type: "application/manifest+json;charset=utf-8" })
+      );
+
+      assets.set(
+        "browserconfig.xml",
+        new Blob([buildBrowserConfig(settings)], { type: "application/xml;charset=utf-8" })
+      );
+
+      state.assets = assets;
+      state.icoBlob = assets.get("favicon.ico");
+      state.generated = true;
+
+      $("downloadButton").disabled = false;
+      $("downloadIcoButton").disabled = false;
+      $("outputStatus").textContent = "PACKAGE READY";
+      $("previewState").textContent = "PACKAGE READY";
+
+      renderAssetGrid();
+      updateIntegration();
+
+      setStatus(
+        `Success! ${assets.size} files generated. Your favicon package is ready to download.`
+      );
+
+      setStatus(
+        "Note: favicon.svg contains embedded raster artwork. For a truly scalable vector favicon, use a vector source logo. Safari pinned tabs work best with a dedicated monochrome SVG path.",
+        false,
+        "downloadStatus"
+      );
+    } catch (error) {
+      console.error(error);
+      setStatus(
+        error.message || "An unexpected error occurred during generation.",
+        true
+      );
+    } finally {
+      button.disabled = false;
+      button.textContent = "Generate favicon package ↗";
+    }
+  }
+
+  async function downloadPackage() {
+    if (!state.generated || !state.assets.size) {
+      setStatus("Generate the package before downloading.", true, "downloadStatus");
+      return;
+    }
+
+    if (typeof JSZip === "undefined") {
+      setStatus("The ZIP library is unavailable.", true, "downloadStatus");
+      return;
+    }
+
+    const button = $("downloadButton");
+    button.disabled = true;
+    button.textContent = "Preparing ZIP…";
+
+    try {
+      const zip = new JSZip();
+
+      for (const [name, blob] of state.assets) {
+        zip.file(name, blob);
+      }
+
+      const readme = `ICONFORGE FAVICON PACKAGE
+==========================
+
+Generated website assets.
+
+INSTALLATION
+1. Copy the generated files to your website's public root directory.
+2. Add the HTML head snippet shown in the generator to your page.
+3. Confirm that manifest.json and its icon paths are accessible.
+4. Test the favicon in your target browsers and devices.
+
+FILES
+${Array.from(state.assets.keys()).join("\n")}
+
+NOTES
+- manifest.json and site.webmanifest contain the same web app manifest.
+- favicon.svg wraps the original image; a vector source is recommended
+  for genuinely resolution-independent artwork.
+- safari-pinned-tab.svg is a starting point, not a traced monochrome mask.
+- Browser support and installability depend on each platform's requirements.
+
+Generated with IconForge.
+`;
+
+      zip.file("README.txt", readme);
+
+      const blob = await zip.generateAsync({
+        type: "blob",
+        compression: "DEFLATE",
+        compressionOptions: { level: 6 }
+      });
+
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      const name = safeFilename(getSettings().shortName || "favicon")
+        .replace(/\s+/g, "-")
+        .replace(/^-+|-+$/g, "") || "favicon";
+
+      a.href = url;
+      a.download = `${name}-favicon-package.zip`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 30000);
+      setStatus("Your ZIP package has been prepared.", false, "downloadStatus");
+    } catch (error) {
+      setStatus(error.message || "Unable to create the ZIP archive.", true, "downloadStatus");
+    } finally {
+      button.disabled = false;
+      button.textContent = "↓ Download complete package (.zip)";
+    }
+  }
+
+  function downloadICO() {
+    if (!state.icoBlob) return;
+
+    const url = URL.createObjectURL(state.icoBlob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "favicon.ico";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+
+    setTimeout(() => URL.revokeObjectURL(url), 30000);
+  }
+
+  async function copyElement(id) {
+    const text = $(id).textContent;
+
+    try {
+      await navigator.clipboard.writeText(text);
+      setStatus("Copied to clipboard.", false, "downloadStatus");
+    } catch {
+      const area = document.createElement("textarea");
+      area.value = text;
+      area.style.position = "fixed";
+      area.style.opacity = "0";
+      document.body.appendChild(area);
+      area.select();
+
+      const success = document.execCommand("copy");
+      area.remove();
+
+      setStatus(
+        success ? "Copied to clipboard." : "Clipboard access failed. Select and copy the text manually.",
+        !success,
+        "downloadStatus"
+      );
+    }
+  }
+
+  $("browseButton").addEventListener("click", () => {
+    $("fileInput").click();
+  });
+
+  $("dropzone").addEventListener("click", event => {
+    if (event.target.closest("button")) return;
+    $("fileInput").click();
+  });
+
+  $("dropzone").addEventListener("keydown", event => {
+    if (event.target !== $("dropzone")) return;
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      $("fileInput").click();
+    }
+  });
+
+  $("fileInput").addEventListener("change", event => {
+    selectFile(event.target.files[0]);
+    event.target.value = "";
+  });
+
+  const dropzone = $("dropzone");
+
+  ["dragenter", "dragover"].forEach(type => {
+    dropzone.addEventListener(type, event => {
+      event.preventDefault();
+      dropzone.classList.add("dragover");
+    });
+  });
+
+  ["dragleave", "drop"].forEach(type => {
+    dropzone.addEventListener(type, event => {
+      event.preventDefault();
+      dropzone.classList.remove("dragover");
+    });
+  });
+
+  dropzone.addEventListener("drop", event => {
+    selectFile(event.dataTransfer.files[0]);
+  });
+
+  $("removeButton").addEventListener("click", () => {
+    state.file = null;
+    state.sourceImage = null;
+    state.sourceDataURL = null;
+
+    if (state.sourceURL) {
+      URL.revokeObjectURL(state.sourceURL);
+      state.sourceURL = null;
+    }
+
+    $("fileInfo").classList.remove("visible");
+    $("sourcePreview").removeAttribute("src");
+    $("mainPreview").removeAttribute("src");
+    $("tabPreview").removeAttribute("src");
+    $("browserTab").classList.remove("has-image");
+    $("previewStage").classList.remove("has-image");
+    $("generateButton").disabled = true;
+    $("previewState").textContent = "AWAITING IMAGE";
+
+    $("previewSizes").innerHTML = `
+      <div class="size-card"><div class="icon-stage">◻</div><strong>16 × 16</strong><small>Browser tab</small></div>
+      <div class="size-card"><div class="icon-stage">◻</div><strong>32 × 32</strong><small>Standard</small></div>
+      <div class="size-card"><div class="icon-stage">◻</div><strong>180 × 180</strong><small>Apple Touch</small></div>
+      <div class="size-card"><div class="icon-stage">◻</div><strong>512 × 512</strong><small>App icon</small></div>`;
+
+    clearGenerated();
+    clearStatus();
+  });
+
+  $("generateButton").addEventListener("click", generatePackage);
+  $("downloadButton").addEventListener("click", downloadPackage);
+  $("downloadIcoButton").addEventListener("click", downloadICO);
+
+  document.querySelectorAll("[data-copy]").forEach(button => {
+    button.addEventListener("click", () => {
+      copyElement(button.dataset.copy);
+    });
+  });
+
+  [
+    "appName",
+    "appShortName",
+    "siteUrl",
+    "backgroundColor",
+    "padding",
+    "transparent"
+  ].forEach(id => {
+    $(id).addEventListener("input", () => {
+      updateSettingsUI();
+      invalidateGenerated();
+    });
+
+    $(id).addEventListener("change", () => {
+      updateSettingsUI();
+      invalidateGenerated();
+    });
+  });
+
+  document.querySelectorAll('input[name="fit"]').forEach(input => {
+    input.addEventListener("change", () => {
+      updateSettingsUI();
+      invalidateGenerated();
+    });
+  });
+
+  $("year").textContent = new Date().getFullYear();
+  updateSettingsUI();
+  renderAssetGrid();
+  updateIntegration();
+})();
+</script>
+</body>
+</html>
