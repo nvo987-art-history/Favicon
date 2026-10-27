@@ -1,0 +1,27 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/">
+
+  <foaf:Person rdf:about="https://nvo987.us/#nicholas-van-orton">
+    <foaf:name>Nicholas Van-Orton</foaf:name>
+    <foaf:homepage rdf:resource="https://nvo987.us/"/>
+    <foaf:mbox rdf:resource="mailto:nvo@nv987.us"/>
+    <foaf:made rdf:resource="https://favicon.nvo987.us/#project"/>
+  </foaf:Person>
+
+  <foaf:Project rdf:about="https://favicon.nvo987.us/#project">
+    <foaf:name>Favicon Builder</foaf:name>
+    <foaf:homepage rdf:resource="https://favicon.nvo987.us/"/>
+    <dc:creator>Nicholas Van-Orton</dc:creator>
+    <dc:description>
+      A browser-based tool for generating favicon and app icon packages
+      from user-provided images.
+    </dc:description>
+    <dc:language>en</dc:language>
+    <dc:type>WebApplication</dc:type>
+  </foaf:Project>
+
+</rdf:RDF>
