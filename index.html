@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#315f50">
+<meta name="description" content="Generate a complete favicon package with browser, Apple, Android, PWA, Safari and Windows assets. Free, private and processed locally.">
+<meta name="robots" content="index,follow">
+<title>Favicon Studio — Full Webpack Generator</title>
+
+<style>
+:root {
+  --bg:#f6f4ef;--paper:#fff;--ink:#1d2421;--muted:#78817c;
+  --line:#dddeda;--green:#315f50;--green-dark:#23493d;
+  --soft:#edf4f0;--radius:14px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input{font:inherit}
+button{cursor:pointer}
+.container{width:min(1160px,calc(100% - 32px));margin:auto}
+header{border-bottom:1px solid var(--line);background:#f6f4eff2;position:sticky;top:0;z-index:5;backdrop-filter:blur(12px)}
+.header-inner{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:68px}
+.brand{font-weight:800;font-size:16px}
+.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+main{padding:38px 0 60px}
+.hero{max-width:800px;margin-bottom:30px}
+.eyebrow{color:var(--green);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+h1{font:500 clamp(38px,6vw,66px)/1.05 Georgia,serif;letter-spacing:-.04em;margin:12px 0}
+h1 em{color:var(--green)}
+.hero p{color:#4d5752;max-width:720px}
+.layout{display:grid;grid-template-columns:340px minmax(0,1fr);gap:20px;align-items:start}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:0 3px 15px #20272308;margin-bottom:18px}
+.panel-head{padding:18px 20px;background:#fbfaf7;border-bottom:1px solid #e9e9e4}
+.panel-head h2{font-size:15px;margin:0}
+.panel-head p{font-size:12px;color:var(--muted);margin:5px 0 0}
+.panel-body{padding:20px}
+.field{margin-bottom:17px}
+.field:last-child{margin-bottom:0}
+label{display:block;font-size:12px;font-weight:750;margin-bottom:7px}
+input[type=text],input[type=url],input[type=color]{width:100%;min-height:42px;padding:8px 11px;border:1px solid #d5d9d5;border-radius:8px;background:#fff;color:var(--ink)}
+input[type=color]{padding:4px}
+input:focus{outline:2px solid #9ab4a8;outline-offset:1px}
+.hint{font-size:11px;color:var(--muted);margin-top:5px}
+.upload{padding:22px 12px;border:1px dashed #bfcfc5;border-radius:10px;background:#fafbf9;text-align:center}
+.upload p{font-size:12px;color:var(--muted)}
+.upload input{max-width:100%;font-size:12px}
+.colors{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{min-height:42px;padding:9px 14px;border:1px solid #cfd5d1;border-radius:8px;background:white;color:var(--ink);font-size:12px;font-weight:750}
+.btn:hover{background:#f6f8f6}
+.primary{background:var(--green);color:white;border-color:var(--green)}
+.primary:hover{background:var(--green-dark);color:white}
+.wide{width:100%}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:20px}
+.preview-head{padding:16px 20px;border-bottom:1px solid #e9e9e4;display:flex;justify-content:space-between;gap:10px;font-size:12px}
+.preview-area{padding:25px;text-align:center}
+.preview-icon{width:104px;height:104px;object-fit:contain;border-radius:20px;box-shadow:0 10px 30px #315f501c}
+.preview-sizes{display:flex;align-items:end;justify-content:center;gap:24px;margin-top:20px}
+.preview-sizes div{font-size:10px;color:var(--muted)}
+.preview-sizes img{display:block;object-fit:contain;margin:0 auto 5px}
+.tabs{display:flex;flex-wrap:wrap;gap:5px;padding:10px;background:#fafaf8;border-bottom:1px solid var(--line)}
+.tab{font-size:10px;font-weight:800;padding:8px 10px;border:0;border-radius:6px;background:transparent;color:var(--muted)}
+.tab.active{background:white;color:var(--green)}
+.code-wrap{position:relative}
+pre{margin:0;padding:20px;min-height:230px;max-height:400px;overflow:auto;background:#f8f8f5;color:#35413b;font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.copy{position:absolute;top:9px;right:9px}
+.assets{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px;padding:15px}
+.asset{display:flex;align-items:center;gap:10px;border:1px solid #e9e9e4;border-radius:8px;padding:10px;min-width:0}
+.asset-icon{width:34px;height:34px;display:grid;place-items:center;flex:none;background:#edf4f0;border-radius:7px;font-size:10px;color:var(--green);font-weight:800}
+.asset strong{display:block;font-size:11px;overflow-wrap:anywhere}
+.asset small{display:block;color:var(--muted);font-size:10px}
+.status{font-size:12px;color:var(--muted)}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--muted);font-size:11px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.header-inner{min-height:60px}.preview-area{padding:20px}}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="container header-inner">
+    <div class="brand">Favicon Studio<small>Full Webpack Generator</small></div>
+    <button class="btn primary" id="topDownload" type="button">Download full ZIP</button>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="eyebrow">Complete favicon deployment kit</div>
+    <h1>One image.<br>A <em>complete</em> favicon system.</h1>
+    <p>Generate browser favicons, Apple Touch Icons, Android and PWA icons, Safari pinned tabs, Windows tiles, a valid web manifest, browser configuration and complete HTML integration code. Everything is processed locally.</p>
+  </section>
+
+  <div class="layout">
+    <aside class="panel">
+      <div class="panel-head">
+        <h2>Full Webpack configuration</h2>
+        <p>One complete package. No unnecessary modes.</p>
+      </div>
+      <div class="panel-body">
+        <div class="field">
+          <label for="source">Source image</label>
+          <div class="upload">
+            <input id="source" type="file" accept="image/png,image/jpeg,image/webp,image/svg+xml">
+            <p>Square, high-resolution artwork recommended. PNG with transparency is supported.</p>
+            <div class="hint" id="sourceInfo">No image selected — a text-based icon will be generated.</div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="siteName">Website name</label>
+          <input id="siteName" type="text" value="My Website" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="domain">Website URL (optional)</label>
+          <input id="domain" type="url" placeholder="https://example.com">
+          <div class="hint">Used for canonical origin and manifest start URL when valid.</div>
+        </div>
+        <div class="field">
+          <label for="assetPath">Asset directory or URL</label>
+          <input id="assetPath" type="text" value="/" placeholder="/assets/icons/">
+          <div class="hint">Examples: /, /assets/icons/, https://example.com/assets/icons/</div>
+        </div>
+        <div class="field">
+          <label for="iconText">Fallback icon text</label>
+          <input id="iconText" type="text" maxlength="3" value="F">
+        </div>
+        <div class="field">
+          <label>Icon colors</label>
+          <div class="colors">
+            <div><label for="color1">Primary</label><input id="color1" type="color" value="#315f50"></div>
+            <div><label for="color2">Secondary</label><input id="color2" type="color" value="#42677d"></div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="padding">Artwork padding: <span id="paddingValue">12%</span></label>
+          <input id="padding" type="range" min="0" max="30" value="12" style="width:100%;accent-color:var(--green)">
+        </div>
+        <div class="field">
+          <label for="radius">Background corner radius: <span id="radiusValue">22%</span></label>
+          <input id="radius" type="range" min="0" max="50" value="22" style="width:100%;accent-color:var(--green)">
+        </div>
+        <div class="actions">
+          <button class="btn" id="reset" type="button">Reset</button>
+          <button class="btn primary" id="download" type="button">Download ZIP</button>
+        </div>
+        <p class="hint">All assets are generated in your browser. Your source image is not uploaded.</p>
+      </div>
+    </aside>
+
+    <div>
+      <section class="panel">
+        <div class="preview-head"><strong>Live preview</strong><span class="status" id="status">Ready</span></div>
+        <div class="preview-area">
+          <img class="preview-icon" id="preview" alt="Favicon preview">
+          <div class="preview-sizes">
+            <div><img id="p16" width="16" height="16" alt=""><span>16 × 16</span></div>
+            <div><img id="p32" width="32" height="32" alt=""><span>32 × 32</span></div>
+            <div><img id="p64" width="48" height="48" alt=""><span>64 × 64</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="tabs">
+          <button class="tab active" data-code="head" type="button">HTML HEAD</button>
+          <button class="tab" data-code="manifest" type="button">WEB MANIFEST</button>
+          <button class="tab" data-code="browserconfig" type="button">BROWSER CONFIG</button>
+          <button class="tab" data-code="safari" type="button">SAFARI SVG</button>
+          <button class="tab" data-code="readme" type="button">README</button>
+        </div>
+        <div class="code-wrap">
+          <button class="btn copy" id="copy" type="button">Copy code</button>
+          <pre id="code"></pre>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Full package contents</h2>
+          <p id="assetCount">Assets generated when you download the ZIP.</p>
+        </div>
+        <div class="assets" id="assets"></div>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer><div class="container">Favicon Studio · Full Webpack · Client-side generation · No upload required</div></footer>
+
+<script>
+"use strict";
+
+const $ = id => document.getElementById(id);
+const enc = new TextEncoder();
+let sourceImage = null;
+let activeTab = "head";
+let previewURL = "";
+
+const PNGS = [
+  ["favicon-16x16.png",16,16],
+  ["favicon-32x32.png",32,32],
+  ["favicon-48x48.png",48,48],
+  ["favicon-96x96.png",96,96],
+  ["favicon-192x192.png",192,192],
+  ["favicon-256x256.png",256,256],
+  ["favicon-512x512.png",512,512],
+  ["apple-touch-icon.png",180,180],
+  ["apple-touch-icon-152x152.png",152,152],
+  ["apple-touch-icon-167x167.png",167,167],
+  ["apple-touch-icon-180x180.png",180,180],
+  ["android-chrome-192x192.png",192,192],
+  ["android-chrome-512x512.png",512,512],
+  ["android-chrome-maskable-192x192.png",192,192,"maskable"],
+  ["android-chrome-maskable-512x512.png",512,512,"maskable"],
+  ["android-chrome-monochrome-192x192.png",192,192,"mono"],
+  ["android-chrome-monochrome-512x512.png",512,512,"mono"],
+  ["mstile-70x70.png",70,70],
+  ["mstile-150x150.png",150,150],
+  ["mstile-310x150.png",310,150,"wide"],
+  ["mstile-310x310.png",310,310]
+];
+
+function settings(){
+  return {
+    name:$("siteName").value.trim() || "My Website",
+    domain:$("domain").value.trim(),
+    path:normalizePath($("assetPath").value.trim()),
+    text:$("iconText").value.trim().slice(0,3) || "F",
+    c1:$("color1").value,
+    c2:$("color2").value,
+    padding:Number($("padding").value)/100,
+    radius:Number($("radius").value)/100
+  };
+}
+
+function normalizePath(input){
+  if(!input) return "/";
+  let p=input.replace(/\\/g,"/");
+  if(/^https?:\/\//i.test(p)){
+    try{
+      const u=new URL(p);
+      u.pathname=u.pathname.replace(/\/+/g,"/");
+      if(!u.pathname.endsWith("/"))u.pathname+="/";
+      return u.href.replace(/\/?$/,"/");
+    }catch{return "/";}
+  }
+  p=p.replace(/\/+/g,"/");
+  if(!p.startsWith("/"))p="/"+p;
+  if(!p.endsWith("/"))p+="/";
+  return p;
+}
+
+function asset(name){
+  return settings().path+name;
+}
+
+function escapeXML(s){
+  return String(s).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&apos;"
+  })[c]);
+}
+
+function svgSource(safari=false){
+  const s=settings();
+  if(safari){
+    return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<path fill="#000" d="M50 5a45 45 0 1 0 0 90 45 45 0 0 0 0-90zm0 8a37 37 0 1 1 0 74 37 37 0 0 1 0-74zm-8 10-4 24-17 7 21 3 8 19 6-21 18-8-21-3z"/>
+</svg>`;
+  }
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop stop-color="${s.c1}"/><stop offset="1" stop-color="${s.c2}"/>
+</linearGradient></defs>
+<rect width="100" height="100" rx="${s.radius*100}" fill="url(#g)"/>
+<text x="50" y="52" fill="#fff" font-family="Arial,sans-serif" font-size="${s.text.length>2?29:43}" font-weight="800" text-anchor="middle" dominant-baseline="middle">${escapeXML(s.text)}</text>
+</svg>`;
+}
+
+function draw(size,opts={}){
+  const s=settings();
+  const c=document.createElement("canvas");
+  c.width=size;c.height=size;
+  const ctx=c.getContext("2d",{alpha:true});
+  const wide=!!opts.wide;
+  const mono=!!opts.mono;
+  const maskable=!!opts.maskable;
+  const g=ctx.createLinearGradient(0,0,size,size);
+  g.addColorStop(0,s.c1);g.addColorStop(1,s.c2);
+  ctx.fillStyle=mono?"#fff":g;
+  const r=wide?0:size*s.radius;
+  ctx.beginPath();
+  ctx.moveTo(r,0);ctx.lineTo(size-r,0);ctx.quadraticCurveTo(size,0,size,r);
+  ctx.lineTo(size,size-r);ctx.quadraticCurveTo(size,size,size-r,size);
+  ctx.lineTo(r,size);ctx.quadraticCurveTo(0,size,0,size-r);
+  ctx.lineTo(0,r);ctx.quadraticCurveTo(0,0,r,0);ctx.closePath();ctx.fill();
+
+  if(sourceImage){
+    const inset=maskable?size*.2:size*s.padding;
+    const box=size-2*inset;
+    const scale=Math.min(box/sourceImage.naturalWidth,box/sourceImage.naturalHeight);
+    const w=sourceImage.naturalWidth*scale,h=sourceImage.naturalHeight*scale;
+    ctx.drawImage(sourceImage,(size-w)/2,(size-h)/2,w,h);
+  }else{
+    ctx.fillStyle=mono?"#000":"#fff";
+    ctx.font=`800 ${size*(s.text.length>2?.29:.44)}px Arial`;
+    ctx.textAlign="center";ctx.textBaseline="middle";
+    ctx.fillText(s.text,size/2,size*.52);
+  }
+  return c;
+}
+
+function png(canvas){
+  const b=atob(canvas.toDataURL("image/png").split(",")[1]);
+  const out=new Uint8Array(b.length);
+  for(let i=0;i<b.length;i++)out[i]=b.charCodeAt(i);
+  return out;
+}
+function u16(n){return new Uint8Array([n&255,(n>>>8)&255]);}
+function u32(n){return new Uint8Array([n&255,(n>>>8)&255,(n>>>16)&255,(n>>>24)&255]);}
+function join(...parts){
+  const out=new Uint8Array(parts.reduce((n,p)=>n+p.length,0));
+  let off=0;for(const p of parts){out.set(p,off);off+=p.length;}return out;
+}
+const crcTable=(()=>{
+  const t=new Uint32Array(256);
+  for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xedb88320^(c>>>1):c>>>1;t[n]=c>>>0;}
+  return t;
+})();
+function crc32(a){
+  let c=0xffffffff;
+  for(const b of a)c=crcTable[(c^b)&255]^(c>>>8);
+  return (c^0xffffffff)>>>0;
+}
+
+function createICO(){
+  const sizes=[16,32,48];
+  const imgs=sizes.map(n=>({n,data:png(draw(n))}));
+  const header=join(u16(0),u16(1),u16(imgs.length));
+  let offset=6+16*imgs.length;
+  const dirs=[],datas=[];
+  for(const im of imgs){
+    dirs.push(join(
+      new Uint8Array([im.n,im.n,0,0]),
+      u16(1),u16(32),u32(im.data.length),u32(offset)
+    ));
+    datas.push(im.data);offset+=im.data.length;
+  }
+  return join(header,...dirs,...datas);
+}
+
+function createManifest(){
+  const s=settings();
+  const icons=[
+    {src:asset("android-chrome-192x192.png"),sizes:"192x192",type:"image/png",purpose:"any"},
+    {src:asset("android-chrome-512x512.png"),sizes:"512x512",type:"image/png",purpose:"any"},
+    {src:asset("android-chrome-maskable-192x192.png"),sizes:"192x192",type:"image/png",purpose:"maskable"},
+    {src:asset("android-chrome-maskable-512x512.png"),sizes:"512x512",type:"image/png",purpose:"maskable"},
+    {src:asset("android-chrome-monochrome-192x192.png"),sizes:"192x192",type:"image/png",purpose:"monochrome"},
+    {src:asset("android-chrome-monochrome-512x512.png"),sizes:"512x512",type:"image/png",purpose:"monochrome"}
+  ];
+  let start="/";
+  let scope="/";
+  let id="/";
+  if(s.domain){
+    try{
+      const u=new URL(s.domain);
+      if(u.protocol==="https:"||u.protocol==="http:"){
+        start=u.origin+"/";
+        scope=u.origin+"/";
+        id=u.origin+"/";
+      }
+    }catch{}
+  }
+  return JSON.stringify({
+    id,
+    name:s.name,
+    short_name:s.name.slice(0,20),
+    description:`Web application for ${s.name}`,
+    start_url:start,
+    scope,
+    display:"standalone",
+    orientation:"any",
+    background_color:s.c1,
+    theme_color:s.c1,
+    icons
+  },null,2)+"\n";
+}
+
+function createBrowserConfig(){
+  const s=settings();
+  return `<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+  <msapplication>
+    <tile>
+      <square70x70logo src="${escapeXML(asset("mstile-70x70.png"))}"/>
+      <square150x150logo src="${escapeXML(asset("mstile-150x150.png"))}"/>
+      <wide310x150logo src="${escapeXML(asset("mstile-310x150.png"))}"/>
+      <square310x310logo src="${escapeXML(asset("mstile-310x310.png"))}"/>
+      <TileColor>${escapeXML(s.c1)}</TileColor>
+    </tile>
+  </msapplication>
+</browserconfig>
+`;
+}
+
+function createHead(){
+  const s=settings();
+  const lines=[
+    "<!-- Favicon Studio: Full Webpack integration -->",
+    `<link rel="icon" href="${escapeXML(asset("favicon.ico"))}" sizes="any">`,
+    `<link rel="icon" type="image/svg+xml" href="${escapeXML(asset("favicon.svg"))}">`,
+    `<link rel="icon" type="image/png" sizes="16x16" href="${escapeXML(asset("favicon-16x16.png"))}">`,
+    `<link rel="icon" type="image/png" sizes="32x32" href="${escapeXML(asset("favicon-32x32.png"))}">`,
+    `<link rel="icon" type="image/png" sizes="48x48" href="${escapeXML(asset("favicon-48x48.png"))}">`,
+    `<link rel="apple-touch-icon" sizes="180x180" href="${escapeXML(asset("apple-touch-icon.png"))}">`,
+    `<link rel="manifest" href="${escapeXML(asset("site.webmanifest"))}">`,
+    `<link rel="mask-icon" href="${escapeXML(asset("safari-pinned-tab.svg"))}" color="${s.c1}">`,
+    `<meta name="theme-color" content="${s.c1}">`,
+    `<meta name="msapplication-TileColor" content="${s.c1}">`,
+    `<meta name="msapplication-TileImage" content="${escapeXML(asset("mstile-150x150.png"))}">`,
+    `<meta name="msapplication-config" content="${escapeXML(asset("browserconfig.xml"))}">`
+  ];
+  if(s.domain){
+    try{
+      const u=new URL(s.domain);
+      if(u.protocol==="https:"||u.protocol==="http:"){
+        lines.unshift(`<link rel="canonical" href="${escapeXML(u.href)}">`);
+      }
+    }catch{}
+  }
+  return lines.join("\n")+"\n";
+}
+
+function createReadme(){
+  const s=settings();
+  return `FAVICON STUDIO — FULL WEBPACK
+================================
+
+Website: ${s.name}
+Website URL: ${s.domain||"Not specified"}
+Asset path: ${s.path}
+
+INSTALLATION
+1. Upload every file to the configured asset directory.
+2. Copy head.html into your page's <head> section.
+3. Keep the manifest and referenced icons at their generated paths.
+4. Serve site.webmanifest as application/manifest+json or application/json.
+5. Serve SVG files as image/svg+xml and PNG files as image/png.
+6. If your server uses a Content Security Policy, allow the required local assets.
+
+PACKAGE
+- favicon.ico
+- favicon.svg
+- PNG favicons and high-resolution icons
+- Apple Touch Icons
+- Android and PWA icons, including maskable and monochrome variants
+- Safari pinned-tab SVG
+- Windows tile PNGs
+- browserconfig.xml
+- site.webmanifest
+- head.html
+- README.txt
+
+NOTES
+Manifest start_url and scope default to the website origin when a valid
+website URL is supplied, otherwise they default to "/". Deploy the manifest
+at a location compatible with the intended application scope.
+
+Image processing is performed locally in your browser.
+No source image is uploaded to a server.
+`;
+}
+
+function createFiles(){
+  const files=[];
+  for(const [name,w,h,kind] of PNGS){
+    let data=png(draw(Math.max(w,h),{
+      wide:kind==="wide",maskable:kind==="maskable",mono:kind==="mono"
+    }));
+    if(w!==h){
+      const src=draw(Math.max(w,h),{wide:true});
+      const out=document.createElement("canvas");
+      out.width=w;out.height=h;
+      const ctx=out.getContext("2d");
+      ctx.drawImage(src,0,0,src.width,src.height,0,0,w,h);
+      data=png(out);
+    }
+    files.push({name,data});
+  }
+  files.push({name:"favicon.ico",data:createICO()});
+  files.push({name:"favicon.svg",data:enc.encode(svgSource())});
+  files.push({name:"safari-pinned-tab.svg",data:enc.encode(svgSource(true))});
+  files.push({name:"site.webmanifest",data:enc.encode(createManifest())});
+  files.push({name:"browserconfig.xml",data:enc.encode(createBrowserConfig())});
+  files.push({name:"head.html",data:enc.encode(createHead())});
+  files.push({name:"README.txt",data:enc.encode(createReadme())});
+  return files;
+}
+
+function zipCreate(files){
+  const local=[],central=[];
+  let offset=0;
+  const now=new Date();
+  const time=(now.getHours()<<11)|(now.getMinutes()<<5)|(now.getSeconds()>>1);
+  const date=((Math.max(1980,now.getFullYear())-1980)<<9)|((now.getMonth()+1)<<5)|now.getDate();
+  for(const file of files){
+    const name=enc.encode(file.name);
+    const data=file.data instanceof Uint8Array?file.data:enc.encode(file.data);
+    const crc=crc32(data);
+    const lh=join(u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(time),u16(date),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),name);
+    local.push(lh,data);
+    const ch=join(u32(0x02014b50),u16(20),u16(20),u16(0x0800),u16(0),u16(time),u16(date),u32(crc),u32(data.length),u32(data.length),u16(name.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(offset),name);
+    central.push(ch);
+    offset+=lh.length+data.length;
+  }
+  const l=join(...local),c=join(...central);
+  const end=join(u32(0x06054b50),u16(0),u16(0),u16(files.length),u16(files.length),u32(c.length),u32(l.length),u16(0));
+  return join(l,c,end);
+}
+
+function renderCode(){
+  const map={
+    head:createHead(),
+    manifest:createManifest(),
+    browserconfig:createBrowserConfig(),
+    safari:svgSource(true),
+    readme:createReadme()
+  };
+  $("code").textContent=map[activeTab]||map.head;
+  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.code===activeTab));
+}
+
+function renderAssets(){
+  const list=[
+    ["favicon.ico","Multi-size ICO"],
+    ["favicon.svg","Vector favicon"],
+    ["site.webmanifest","Valid JSON manifest"],
+    ["browserconfig.xml","Windows configuration"],
+    ["safari-pinned-tab.svg","Safari pinned tab"],
+    ["head.html","Complete HTML integration"],
+    ["README.txt","Installation guide"],
+    ...PNGS.map(x=>[x[0],`${x[1]} × ${x[2]} PNG`])
+  ];
+  $("assets").replaceChildren();
+  for(const [name,desc] of list){
+    const item=document.createElement("div");
+    item.className="asset";
+    const icon=document.createElement("div");
+    icon.className="asset-icon";
+    icon.textContent=name.endsWith(".png")?"PNG":name.endsWith(".svg")?"SVG":name.endsWith(".ico")?"ICO":name.endsWith(".xml")?"XML":name.endsWith(".webmanifest")?"JSON":"HTML";
+    const info=document.createElement("div");
+    const strong=document.createElement("strong");
+    strong.textContent=name;
+    const small=document.createElement("small");
+    small.textContent=desc;
+    info.append(strong,small);
+    item.append(icon,info);
+    $("assets").append(item);
+  }
+  $("assetCount").textContent=`${list.length} files included in the full package`;
+}
+
+function updatePreview(){
+  $("paddingValue").textContent=$("padding").value+"%";
+  $("radiusValue").textContent=$("radius").value+"%";
+  const canvas=draw(256);
+  const url=canvas.toDataURL("image/png");
+  $("preview").src=url;
+  $("p16").src=url;
+  $("p32").src=url;
+  $("p64").src=url;
+  $("status").textContent=sourceImage?"Source image loaded":"Using text fallback";
+  renderCode();
+}
+
+async function downloadPackage(){
+  const btn=$("download");
+  btn.disabled=true;
+  $("topDownload").disabled=true;
+  const old=btn.textContent;
+  btn.textContent="Generating ZIP…";
+  try{
+    const files=createFiles();
+    const zip=zipCreate(files);
+    const blob=new Blob([zip],{type:"application/zip"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    const slug=settings().name.normalize("NFKD").replace(/[^\w -]/g,"").trim().replace(/\s+/g,"-").toLowerCase()||"website";
+    a.href=url;
+    a.download=`${slug}-full-favicon-package.zip`;
+    document.body.append(a);
+    a.click();
+    a.remove();
+    setTimeout(()=>URL.revokeObjectURL(url),10000);
+    $("status").textContent=`Generated ${files.length} files`;
+  }catch(err){
+    console.error(err);
+    $("status").textContent="Generation failed — check the browser console";
+    alert("The package could not be generated. Please try a supported image or another browser.");
+  }finally{
+    btn.disabled=false;
+    $("topDownload").disabled=false;
+    btn.textContent=old;
+  }
+}
+
+$("source").addEventListener("change",event=>{
+  const file=event.target.files&&event.target.files[0];
+  if(!file)return;
+  if(!["image/png","image/jpeg","image/webp","image/svg+xml"].includes(file.type)){
+    alert("Please select a PNG, JPEG, WebP or SVG image.");
+    event.target.value="";
+    return;
+  }
+  const reader=new FileReader();
+  reader.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      sourceImage=img;
+      $("sourceInfo").textContent=`${file.name} · ${img.naturalWidth} × ${img.naturalHeight}`;
+      updatePreview();
+    };
+    img.onerror=()=>alert("The selected image could not be decoded.");
+    img.src=reader.result;
+  };
+  reader.onerror=()=>alert("Could not read the selected file.");
+  reader.readAsDataURL(file);
+});
+
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
+  activeTab=b.dataset.code;
+  renderCode();
+}));
+
+$("copy").addEventListener("click",async()=>{
+  try{
+    await navigator.clipboard.writeText($("code").textContent);
+    $("copy").textContent="Copied!";
+    setTimeout(()=>$("copy").textContent="Copy code",1500);
+  }catch{
+    const range=document.createRange();
+    range.selectNodeContents($("code"));
+    const sel=window.getSelection();
+    sel.removeAllRanges();sel.addRange(range);
+    $("status").textContent="Select and copy the code manually.";
+  }
+});
+
+["siteName","domain","assetPath","iconText","color1","color2","padding","radius"].forEach(id=>{
+  $(id).addEventListener("input",updatePreview);
+  $(id).addEventListener("change",updatePreview);
+});
+
+$("download").addEventListener("click",downloadPackage);
+$("topDownload").addEventListener("click",downloadPackage);
+
+$("reset").addEventListener("click",()=>{
+  $("source").value="";
+  $("siteName").value="My Website";
+  $("domain").value="";
+  $("assetPath").value="/";
+  $("iconText").value="F";
+  $("color1").value="#315f50";
+  $("color2").value="#42677d";
+  $("padding").value=12;
+  $("radius").value=22;
+  sourceImage=null;
+  $("sourceInfo").textContent="No image selected — a text-based icon will be generated.";
+  updatePreview();
+});
+
+renderAssets();
+updatePreview();
+</script>
+</body>
+  </html> 
