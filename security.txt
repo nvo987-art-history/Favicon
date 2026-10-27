@@ -1,0 +1,5 @@
+
+Contact: mailto:nvo@nv987.us
+Preferred-Languages: en
+Canonical: https://favicon.nvo987.us/.well-known/security.txt
+Expires: 2027-10-27T00:00:00Z
