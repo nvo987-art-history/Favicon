@@ -1,0 +1,68 @@
+
+# Favicon Builder
+
+> Favicon Builder is a browser-based tool for creating favicon and
+> app icon packages from a user-provided image.
+
+## Website
+
+- Homepage: https://favicon.nvo987.us/
+- Project owner: Nicholas Van-Orton
+- Brand: NVO987
+- Language: English
+- Contact: nvo@nv987.us
+
+## Purpose
+
+Favicon Builder helps website owners create a collection of common
+browser, mobile, and web application icons from a single image.
+
+## Features
+
+- PNG, JPEG, SVG, and WebP image input, subject to browser support.
+- Drag-and-drop image selection.
+- Multi-size PNG generation.
+- ICO favicon generation.
+- SVG favicon generation.
+- Apple Touch Icons.
+- Android and maskable icons.
+- Web app manifests.
+- Microsoft tile assets.
+- Open Graph preview image.
+- HTML integration snippet.
+- ZIP package download.
+
+## Privacy
+
+Source images are intended to be processed in the user's browser.
+The application loads JSZip from a third-party CDN.
+
+## Usage
+
+1. Visit the homepage.
+2. Select or drop an image.
+3. Generate the icon package.
+4. Extract the downloaded archive.
+5. Install the files in the target website's public directory.
+6. Verify the generated paths and manifest configuration.
+
+## Technical Details
+
+The application uses HTML, CSS, JavaScript, HTML Canvas, and JSZip.
+Generated assets should be tested against the target browsers and devices.
+
+## Project Resources
+
+- Homepage: https://favicon.nvo987.us/
+- Project documentation: https://favicon.nvo987.us/README.md
+- License information: https://favicon.nvo987.us/LICENSE
+- Security contact: mailto:nvo@nv987.us
+
+## Content and Accuracy
+
+This file describes the intended purpose and behavior of the project.
+It does not guarantee compatibility with every browser, platform,
+or third-party service.
+
+Do not infer undocumented features, certifications, endorsements,
+or security guarantees.
